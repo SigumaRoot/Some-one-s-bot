@@ -13,5 +13,6 @@ module.exports = {
             .setColor(config.color)
             .setTimestamp();
         client.channels.fetch(config.logch.guildDelete).then(c => c.send({embeds: [delEmbed]}));
+      console.log(`[${functions.timeToJST(Date.now(), true)}] Deleted from ${guild.name}(${guild.id})!`);
     }
 }
