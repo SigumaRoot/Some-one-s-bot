@@ -1,13 +1,23 @@
-const Discord = require("discord.js");
+//const Discord = require("discord.js");
 const fs = require("fs");
-const intents = ["GUILDS"];
-const client = new Discord.Client({ intents: intents });
+//const intents = ["GUILDS"];
+//const client = new Discord.Client({ intents: intents });
+const { Client, GatewayIntentBits, Collection, Partials } = require("discord.js")
+const client = new Client({
+  'intents': [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent
+  ],
+  'partials': [Partials.Channel]
+});
+
 
 const config = require("./config.js");
 const functions = require("./functions.js");
 
 // コマンドハンドリング
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 const commandFolders = fs.readdirSync("./commands");
 for (const folder of commandFolders) {
     console.log(`\u001b[32m===${folder} commands===\u001b[0m`);

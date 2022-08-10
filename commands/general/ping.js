@@ -1,5 +1,6 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const Discord = require("discord.js");
+const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
     guildOnly: false, // サーバー専用コマンドかどうか
@@ -8,7 +9,7 @@ module.exports = {
         .setDescription("Ping値を測定"),
 
     async execute(i, client) {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.Embed()
                 .setTitle("Ping")
                 .setDescription("Pong!")
                 .addField("WebSocket", `**${client.ws.ping} ms**`, true)
