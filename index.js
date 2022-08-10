@@ -17,7 +17,7 @@ const config = require("./config.js");
 const functions = require("./functions.js");
 
 // コマンドハンドリング
-client.commands = new Discord.Collection();
+client.commands = new Collection();
 const commandFolders = fs.readdirSync("./commands");
 for (const folder of commandFolders) {
   console.log(`\u001b[32m===${folder} commands===\u001b[0m`);
