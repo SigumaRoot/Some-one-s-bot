@@ -13,5 +13,6 @@ module.exports = {
             .setColor(config.color)
             .setTimestamp();
         client.channels.fetch(config.logch.guildCreate).then(c => c.send({embeds: [addEmbed]}));
+      console.log(`[${functions.timeToJST(Date.now(), true)}] Added to ${guild.name}(${guild.id})!`);
     }
 }
