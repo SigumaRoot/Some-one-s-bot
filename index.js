@@ -96,7 +96,7 @@ client.on("interactionCreate", async i => {
 });
 // コmsg
 client.on("messageCreate", async msg => {
-  console.log('?s!>'+msg.content.indexOf(`s!`) !== 0);
+  console.log(msg.content.indexOf(`s!`) !== 0);
   console.log('content:'+msg.content);
   console.log('-s!>'+msg.content.replace('s!', ''));
   if (msg.content.indexOf(`s!`) !== 0) return;
