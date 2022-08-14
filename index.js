@@ -65,7 +65,7 @@ client.on("interactionCreate", async i => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
-      .setColor(color.e);
+      .setColor(config.color.e);
     i.reply({ embeds: [embed] })
     return;
   }
@@ -108,16 +108,16 @@ client.on("messageCreate", async msg => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
-      .setColor(color.e);
-    message.reply({ embeds: [embed] })
+      .setColor(config.color.e);
+    msg.reply({ embeds: [embed] })
     return;
   }
   if (command.adminGuildOnly && !(msg.guild.id==config.dev.testGuild)) {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("これは管理コマンドです。")
-      .setColor(color.e);
-    message.reply({ embeds: [embed] });
+      .setColor(config.color.e);
+    msg.reply({ embeds: [embed] });
     return;
   }
 
@@ -151,7 +151,7 @@ process.on("uncaughtException", error => {
   const embed = new EmbedBuilder()
     .setTitle("ERROR - uncaughtException")
     .setDescription("```\n" + error.stack + "\n```")
-    .setColor(onfig.color.e)
+    .setColor(config.color.e)
     .setTimestamp();
   client.channels.fetch(config.logch.error).then(c => c.send({ embeds: [embed] }));
 });
@@ -161,7 +161,7 @@ process.on("unhandledRejection", (reason, promise) => {
   const embed = new EmbedBuilder()
     .setTitle("ERROR - unhandledRejection")
     .setDescription("```\n" + reason + "\n```")
-    .setColor(color.e)
+    .setColor(config.color.e)
     .setTimestamp();
   client.channels.fetch(config.logch.error).then(c => c.send({ embeds: [embed] }));
 });
