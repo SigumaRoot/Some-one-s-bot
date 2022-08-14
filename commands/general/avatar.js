@@ -30,8 +30,8 @@ module.exports = {
     } catch (e) {
       const embed = new Discord.EmbedBuilder()
         .setTitle(`Your avatar.`)
-        .setDescription(`${i.auther.displayAvatarURL({ dynamic: true })}`)
-        .setImage(i.auther.displayAvatarURL({ dynamic: true }))
+        .setDescription(`${i.auther.avatarURL({ dynamic: true })}`)
+        .setImage(i.auther.avatarURL({ dynamic: true }))
         .setColor(client.config.color)
         .setTimestamp();
       return i.reply({ embeds: [embed] })
