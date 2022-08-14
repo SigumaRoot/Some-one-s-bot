@@ -65,7 +65,7 @@ client.on("interactionCreate", async i => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
-      .setColor("RED");
+      .setColor("0xf00");
     i.reply({ embeds: [embed] })
     return;
   }
@@ -85,7 +85,7 @@ client.on("interactionCreate", async i => {
       .setThumbnail(i.user.displayAvatarURL({ dynamic: true }))
       .addFields([
         { name: 'コマンド', value: "```\n" + i.toString() + "\n```" },
-        { name: '実行サーバー', value: "```\n" + `${i.guild.name}(${i.guild?.id ?? "DM"})` + "\n```" },
+        { name: '実行サーバー', value: "```\n" + `${i.guild?.id ?? "DM"}(${i.guild?.id ?? "DM"})` + "\n```" },
         { name: "実行ユーザー", value: "```\n" + `${i.user.tag}(${i.user.id})` + "\n```" }])
       .setFooter({ text: String(i.id) })
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
@@ -108,8 +108,16 @@ client.on("messageCreate", async msg => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
-      .setColor("RED");
+      .setColor("0xf00");
     message.reply({ embeds: [embed] })
+    return;
+  }
+  if (command.adminGuildOnly && !(msg.guild.id==config.dev.testGuild)) {
+    const embed = new EmbedBuilder()
+      .setTitle("エラー")
+      .setDescription("これは管理コマンドです。")
+      .setColor("0xf00");
+    message.reply({ embeds: [embed] });
     return;
   }
 
