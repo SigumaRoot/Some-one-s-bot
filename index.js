@@ -122,14 +122,14 @@ client.on("messageCreate", async msg => {
     await command.execute(msg, client);
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
-      .setDescription(`${msg.user.tag}(${msg.user.id}) がコマンドを実行しました。`)
+      .setDescription(`${msg.author.tag}(${msg.author.id}) がコマンドを実行しました。`)
       .setColor(config.color)
       .setTimestamp()
       .setThumbnail(msg.user.displayAvatarURL({ dynamic: true }))
       .addFields([
         { name: 'コマンド', value: "```\n" + msg.toString() + "\n```" },
         { name: '実行サーバー', value: "```\n" + `${i.guild.name}(${msg.guild?.id ?? "DM"})` + "\n```" },
-        { name: "実行ユーザー", value: "```\n" + `${msg.user.tag}(${msg.user.id})` + "\n```" }])
+        { name: "実行ユーザー", value: "```\n" + `${msg.author.tag}(${msg.author.id})` + "\n```" }])
       .setFooter({ text: String(msg.id) })
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
   } catch (error) {
