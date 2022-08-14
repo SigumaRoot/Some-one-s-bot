@@ -11,16 +11,16 @@ module.exports = {
   async execute(i, client) {
     try {
       const user = i.options.getUser('target');
-    } catch (e) {}
-    if (user) {
-      const embed = new Discord.EmbedBuilder()
-        .setTitle(`${user.username}'s avatar`)
-        .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
-        .setColor(client.config.color)
-        .setImage(user.displayAvatarURL({ dynamic: true }))
-        .setTimestamp();
-      return i.reply({ embeds: [embed] })
-    }
+      if (user) {
+        const embed = new Discord.EmbedBuilder()
+          .setTitle(`${user.username}'s avatar`)
+          .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
+          .setColor(client.config.color)
+          .setImage(user.displayAvatarURL({ dynamic: true }))
+          .setTimestamp();
+        return i.reply({ embeds: [embed] })
+      }
+    } catch (e) { }
     const embed = new Discord.EmbedBuilder()
       .setTitle(`Your avatar.`)
       .setDescription(`${i.user.displayAvatarURL({ dynamic: true })}`)
