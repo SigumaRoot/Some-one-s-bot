@@ -9,21 +9,24 @@ module.exports = {
     .setDescription('Get the avatar URL of the selected user, or your own avatar.')
     .addUserOption(option => option.setName('target').setDescription('The user\'s avatar to show')),
   async execute(i, client) {
-    const user = i.options.getUser('target');
+    try {
+      const user = i.options.getUser('target');
+    } catch (e) {}
     if (user) {
       const embed = new Discord.EmbedBuilder()
-      .setTitle(`${user.username}'s avatar`)
-      .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
-      .setColor(client.config.color)
-      .setImage(user.displayAvatarURL({ dynamic: true }))
-      .setTimestamp();
-      return i.reply({ embeds: [embed] })}
+        .setTitle(`${user.username}'s avatar`)
+        .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
+        .setColor(client.config.color)
+        .setImage(user.displayAvatarURL({ dynamic: true }))
+        .setTimestamp();
+      return i.reply({ embeds: [embed] })
+    }
     const embed = new Discord.EmbedBuilder()
       .setTitle(`Your avatar.`)
       .setDescription(`${i.user.displayAvatarURL({ dynamic: true })}`)
       .setImage(i.user.displayAvatarURL({ dynamic: true }))
       .setColor(client.config.color)
       .setTimestamp();
-      return i.reply({ embeds: [embed] })
+    return i.reply({ embeds: [embed] })
   },
 }
