@@ -27,15 +27,14 @@ module.exports = {
         .setColor(client.config.color)
         .setTimestamp();
       return i.reply({ embeds: [embed] })
-    } catch (e) {
-      const embed = new Discord.EmbedBuilder()
+    } catch (e) {}
+    const embed = new Discord.EmbedBuilder()
         .setTitle(`Your avatar.`)
-        .setDescription(`${i.auther.avatarURL({ dynamic: true })}`)
-        .setImage(i.auther.avatarURL({ dynamic: true }))
+        .setDescription(`${i.author.displayAvatarURL({ dynamic: true })}`)
+        .setImage(i.author.displayAvatarURL({ dynamic: true }))
         .setColor(client.config.color)
         .setTimestamp();
       return i.reply({ embeds: [embed] })
-    }
-
+    
   },
 }
