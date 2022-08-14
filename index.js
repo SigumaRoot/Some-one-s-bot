@@ -128,7 +128,7 @@ client.on("messageCreate", async msg => {
       .setThumbnail(msg.author.displayAvatarURL({ dynamic: true }))
       .addFields([
         { name: 'コマンド', value: "```\n" + msg.toString() + "\n```" },
-        { name: '実行サーバー', value: "```\n" + `${i.guild.name}(${msg.guild?.id ?? "DM"})` + "\n```" },
+        { name: '実行サーバー', value: "```\n" + `${msg.guild.name}(${msg.guild?.id ?? "DM"})` + "\n```" },
         { name: "実行ユーザー", value: "```\n" + `${msg.author.tag}(${msg.author.id})` + "\n```" }])
       .setFooter({ text: String(msg.id) })
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
