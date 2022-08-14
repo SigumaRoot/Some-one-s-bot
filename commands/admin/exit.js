@@ -4,7 +4,8 @@ const { ApplicationCommandType, ApplicationCommandOptionType } = require('discor
 
 module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
-  data: new SlashCommandBuilder() // スラッシュコマンド登録のため
+  adminGuildOnly: true,
+  data: new SlashCommandBuilder() 
     .setName("exit")
     .setDescription("exit"),
 
