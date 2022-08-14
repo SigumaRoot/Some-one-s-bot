@@ -15,7 +15,7 @@ module.exports = {
         const embed = new Discord.EmbedBuilder()
           .setTitle(`${user.username}'s avatar`)
           .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
-          .setColor(client.config.color)
+          .setColor(client.config.color.s)
           .setImage(user.displayAvatarURL({ dynamic: true }))
           .setTimestamp();
         return i.reply({ embeds: [embed] })
@@ -24,17 +24,18 @@ module.exports = {
         .setTitle(`Your avatar.`)
         .setDescription(`${i.user.displayAvatarURL({ dynamic: true })}`)
         .setImage(i.user.displayAvatarURL({ dynamic: true }))
-        .setColor(client.config.color)
+        .setColor(client.config.color.s)
         .setTimestamp();
       return i.reply({ embeds: [embed] })
-    } catch (e) {}
-    const embed = new Discord.EmbedBuilder()
+    } catch (e) {
+      console.log(e);
+      const embed = new Discord.EmbedBuilder()
         .setTitle(`Your avatar.`)
         .setDescription(`${i.author.displayAvatarURL({ dynamic: true })}`)
         .setImage(i.author.displayAvatarURL({ dynamic: true }))
-        .setColor(client.config.color)
+        .setColor(client.config.color.s)
         .setTimestamp();
       return i.reply({ embeds: [embed] })
-    
+    }
   },
 }
