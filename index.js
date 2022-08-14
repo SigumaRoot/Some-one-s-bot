@@ -55,6 +55,7 @@ for (const file of eventFiles) {
 
 // コマンドが来た時
 client.on("interactionCreate", async i => {
+  console.log(i.commandName);
   if (!i.isCommand()) return;
   const command = client.commands.get(i.commandName);
   if (!command) return;
@@ -95,8 +96,11 @@ client.on("interactionCreate", async i => {
 });
 // コmsg
 client.on("messageCreate", async msg => {
+  console.log(msg.content.indexOf(`s!`) !== 0);
+  console.log(message.content);
+  console.log(msg.content.replace('s!', ''));
   if (msg.content.indexOf(`s!`) !== 0) return;
-  const command = client.commands.get(msg.commandName);
+  const command = client.commands.get(msg.content.replace('s!', ''));
   if (!command) return;
 
   // DM専用コマンド
