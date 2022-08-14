@@ -20,13 +20,22 @@ module.exports = {
           .setTimestamp();
         return i.reply({ embeds: [embed] })
       }
-    } catch (e) { }
-    const embed = new Discord.EmbedBuilder()
-      .setTitle(`Your avatar.`)
-      .setDescription(`${i.user.displayAvatarURL({ dynamic: true })}`)
-      .setImage(i.user.displayAvatarURL({ dynamic: true }))
-      .setColor(client.config.color)
-      .setTimestamp();
-    return i.reply({ embeds: [embed] })
+      const embed = new Discord.EmbedBuilder()
+        .setTitle(`Your avatar.`)
+        .setDescription(`${i.user.displayAvatarURL({ dynamic: true })}`)
+        .setImage(i.user.displayAvatarURL({ dynamic: true }))
+        .setColor(client.config.color)
+        .setTimestamp();
+      return i.reply({ embeds: [embed] })
+    } catch (e) {
+      const embed = new Discord.EmbedBuilder()
+        .setTitle(`Your avatar.`)
+        .setDescription(`${i.auther.displayAvatarURL({ dynamic: true })}`)
+        .setImage(i.auther.displayAvatarURL({ dynamic: true }))
+        .setColor(client.config.color)
+        .setTimestamp();
+      return i.reply({ embeds: [embed] })
+    }
+
   },
 }
