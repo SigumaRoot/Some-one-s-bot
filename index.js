@@ -125,7 +125,7 @@ client.on("messageCreate", async msg => {
       .setDescription(`${msg.author.tag}(${msg.author.id}) がコマンドを実行しました。`)
       .setColor(config.color)
       .setTimestamp()
-      .setThumbnail(msg.user.displayAvatarURL({ dynamic: true }))
+      .setThumbnail(msg.author.displayAvatarURL({ dynamic: true }))
       .addFields([
         { name: 'コマンド', value: "```\n" + msg.toString() + "\n```" },
         { name: '実行サーバー', value: "```\n" + `${i.guild.name}(${msg.guild?.id ?? "DM"})` + "\n```" },
