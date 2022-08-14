@@ -61,7 +61,7 @@ client.on("interactionCreate", async i => {
 
   // DM専用コマンド
   if (command.guildOnly && !i.inGuild()) {
-    const embed = new Discord.MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
       .setColor("RED");
@@ -93,11 +93,50 @@ client.on("interactionCreate", async i => {
   }
 
 });
+// コマンドが来た時
+client.on("message", async message => {
+  if (message.content.indexOf(`s!`) !== 0) return;
+  const command = client.commands.get(message.commandName);
+  if (!command) return;
 
+  // DM専用コマンド
+  if (command.guildOnly && !message.inGuild()) {
+    const embed = new EmbedBuilder()
+      .setTitle("エラー")
+      .setDescription("このコマンドはDMでは実行できません。")
+      .setColor("RED");
+    message.reply({ embeds: [embed] })
+    return;
+  }
+
+  // こういうやつはclientに生やすと使いやすくなる
+  client.func = functions;
+  client.config = config;
+
+  // 実行
+  try {
+    await command.execute(message, client);
+    const log = new EmbedBuilder()
+      .setTitle("コマンド実行ログ")
+      .setDescription(`${i.user.tag}(${i.user.id}) がコマンドを実行しました。`)
+      .setColor(config.color)
+      .setTimestamp()
+      .setThumbnail(i.user.displayAvatarURL({ dynamic: true }))
+      .addFields([
+        { name: 'コマンド', value: "```\n" + i.toString() + "\n```" },
+        { name: '実行サーバー', value: "```\n" + `${i.guild.name}(${i.guild?.id ?? "DM"})` + "\n```" },
+        { name: "実行ユーザー", value: "```\n" + `${i.user.tag}(${i.user.id})` + "\n```" }])
+      .setFooter({ text: String(i.id) })
+    client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
+  } catch (error) {
+    console.error(error);
+  }
+
+});
 // エラー処理 (これ入れないとエラーで落ちる。本当は良くないかもしれない)
 process.on("uncaughtException", error => {
   console.error(`[${functions.timeToJST(Date.now(), true)}] ${error.stack}`);
-  const embed = new Discord.MessageEmbed()
+  const embed = new EmbedBuilder()
     .setTitle("ERROR - uncaughtException")
     .setDescription("```\n" + error.stack + "\n```")
     .setColor("RED")
@@ -107,7 +146,7 @@ process.on("uncaughtException", error => {
 
 process.on("unhandledRejection", (reason, promise) => {
   console.error(`\u001b[31m[${functions.timeToJST(Date.now(), true)}] ${reason}\u001b[0m\n`, promise);
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setTitle("ERROR - unhandledRejection")
     .setDescription("```\n" + reason + "\n```")
     .setColor("RED")
