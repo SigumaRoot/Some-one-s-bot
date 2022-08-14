@@ -65,7 +65,7 @@ client.on("interactionCreate", async i => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
-      .setColor("0xf00");
+      .setColor(color.e);
     i.reply({ embeds: [embed] })
     return;
   }
@@ -80,7 +80,7 @@ client.on("interactionCreate", async i => {
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${i.user.tag}(${i.user.id}) がコマンドを実行しました。`)
-      .setColor(config.color)
+      .setColor(config.color.s)
       .setTimestamp()
       .setThumbnail(i.user.displayAvatarURL({ dynamic: true }))
       .addFields([
@@ -108,7 +108,7 @@ client.on("messageCreate", async msg => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
-      .setColor("0xf00");
+      .setColor(color.e);
     message.reply({ embeds: [embed] })
     return;
   }
@@ -116,7 +116,7 @@ client.on("messageCreate", async msg => {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("これは管理コマンドです。")
-      .setColor("0xf00");
+      .setColor(color.e);
     message.reply({ embeds: [embed] });
     return;
   }
@@ -131,7 +131,7 @@ client.on("messageCreate", async msg => {
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${msg.author.tag}(${msg.author.id}) がコマンドを実行しました。`)
-      .setColor(config.color)
+      .setColor(config.color.s)
       .setTimestamp()
       .setThumbnail(msg.author.displayAvatarURL({ dynamic: true }))
       .addFields([
@@ -151,7 +151,7 @@ process.on("uncaughtException", error => {
   const embed = new EmbedBuilder()
     .setTitle("ERROR - uncaughtException")
     .setDescription("```\n" + error.stack + "\n```")
-    .setColor("RED")
+    .setColor(onfig.color.e)
     .setTimestamp();
   client.channels.fetch(config.logch.error).then(c => c.send({ embeds: [embed] }));
 });
@@ -161,7 +161,7 @@ process.on("unhandledRejection", (reason, promise) => {
   const embed = new EmbedBuilder()
     .setTitle("ERROR - unhandledRejection")
     .setDescription("```\n" + reason + "\n```")
-    .setColor("RED")
+    .setColor(color.e)
     .setTimestamp();
   client.channels.fetch(config.logch.error).then(c => c.send({ embeds: [embed] }));
 });
