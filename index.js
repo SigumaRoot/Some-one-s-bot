@@ -93,14 +93,14 @@ client.on("interactionCreate", async i => {
   }
 
 });
-// コマンドが来た時
-client.on("message", async message => {
-  if (message.content.indexOf(`s!`) !== 0) return;
-  const command = client.commands.get(message.commandName);
+// コmsg
+client.on("messageCreate", async msg => {
+  if (msg.content.indexOf(`s!`) !== 0) return;
+  const command = client.commands.get(msg.commandName);
   if (!command) return;
 
   // DM専用コマンド
-  if (command.guildOnly && !message.inGuild()) {
+  if (command.guildOnly && !msg.inGuild()) {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("このコマンドはDMでは実行できません。")
@@ -115,7 +115,7 @@ client.on("message", async message => {
 
   // 実行
   try {
-    await command.execute(message, client);
+    await command.execute(msg, client);
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${i.user.tag}(${i.user.id}) がコマンドを実行しました。`)
