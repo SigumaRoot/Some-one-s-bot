@@ -28,7 +28,6 @@ module.exports = {
         .setTimestamp();
       return i.reply({ embeds: [embed] })
     } catch (e) {
-      console.log(e);
       const embed = new Discord.EmbedBuilder()
         .setTitle(`Your avatar.`)
         .setDescription(`${i.author.displayAvatarURL({ dynamic: true })}`)
