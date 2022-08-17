@@ -119,10 +119,6 @@ client.on("messageCreate", async msg => {
     return;
   }
 
-  // こういうやつはclientに生やすと使いやすくなる
-  client.func = functions;
-  client.config = config;
-
   // 実行
   try {
     await command.execute(msg, client);

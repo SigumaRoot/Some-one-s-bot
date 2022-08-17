@@ -16,7 +16,7 @@ module.exports = {
       .addFields([
         { name: 'WebSocket', value: ` ** ${client.ws.ping} ms ** ` }, 
         { name: 'コマンド受信', value: `** ${ cmdPing } ms ** ` }])
-      .setColor(client.config.color)
+      .setColor(client.config.color.s)
       .setTimestamp();
     i.reply({ embeds: [embed] });
   },
