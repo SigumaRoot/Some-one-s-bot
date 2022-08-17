@@ -1,7 +1,7 @@
 module.exports = {
   clientId: process.env.clientId,
   color: {
-    s: "0x1bff49",
+    s:"0x1bff49",
     e:"0xff0000",
   },
   token: process.env.token,
