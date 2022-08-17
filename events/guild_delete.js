@@ -6,7 +6,7 @@ module.exports = {
     name: "guildDelete",
     async execute(guild, client) {
         client.user.setActivity(`Type /help | Servers: ${client.guilds.cache.size}`);
-        const delEmbed = new Discord.MessageEmbed()
+        const delEmbed = new Discord.EmbedBuilder()
             .setTitle("サーバー退出")
             .setDescription(`${guild.name}(${guild.id})からBotが退出しました。`)
             .setThumbnail(guild.iconURL({ dynamic: true }))
