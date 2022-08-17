@@ -10,7 +10,7 @@ module.exports = {
             .setTitle("サーバー追加")
             .setDescription(`${guild.name}(${guild.id})にBotが追加されました。`)
             .setThumbnail(guild.iconURL({ dynamic: true }))
-            .setColor(config.color)
+            .setColor(config.color.s)
             .setTimestamp();
         client.channels.fetch(config.logch.guildCreate).then(c => c.send({embeds: [addEmbed]}));
       console.log(`[${functions.timeToJST(Date.now(), true)}] Added to ${guild.name}(${guild.id})!`);
