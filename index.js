@@ -14,6 +14,9 @@ const client = new Client({
 const config = require("./config.js");
 const functions = require("./functions.js");
 
+client.func = functions;
+client.config = config;
+
 // コマンドハンドリング
 client.commands = new Collection();
 const commandFolders = fs.readdirSync("./commands");
@@ -68,10 +71,6 @@ client.on("interactionCreate", async i => {
     return;
   }
 
-  // こういうやつはclientに生やすと使いやすくなる
-  client.func = functions;
-  client.config = config;
-
   // 実行
   try {
     await command.execute(i, client);
@@ -95,8 +94,8 @@ client.on("interactionCreate", async i => {
 // コmsg
 client.on("messageCreate", async msg => {
   console.log(msg.content.indexOf(`s!`) !== 0);
-  console.log('content:'+msg.content);
-  console.log('-s!>'+msg.content.replace('s!', ''));
+  console.log('content:' + msg.content);
+  console.log('-s!>' + msg.content.replace('s!', ''));
   if (msg.content.indexOf(`s!`) !== 0) return;
   const command = client.commands.get(msg.content.replace('s!', ''));
   if (!command) return;
@@ -110,7 +109,7 @@ client.on("messageCreate", async msg => {
     msg.reply({ embeds: [embed] })
     return;
   }
-  if (command.adminGuildOnly && !(msg.guild.id==config.dev.testGuild)) {
+  if (command.adminGuildOnly && !(msg.guild.id == config.dev.testGuild)) {
     const embed = new EmbedBuilder()
       .setTitle("エラー")
       .setDescription("これは管理コマンドです。")
