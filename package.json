@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "SigumaRoot",
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^1.1.0",
