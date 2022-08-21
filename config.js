@@ -1,4 +1,5 @@
 module.exports = {
+  BuildName:"",
   clientId: process.env.clientId,
   color: {
     s:"0x1bff49",
