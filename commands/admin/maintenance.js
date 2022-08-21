@@ -6,19 +6,20 @@ module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
   adminGuildOnly: true,
   data: new SlashCommandBuilder() // スラッシュコマンド登録のため
-    .setName("help")
-    .setDescription("helpを表示")
-    .addUserOption(option => option.setName('cmdname').setDescription('対象のコマンド')),
+    .setName("maintenance")
+    .setDescription("メンテモード")
+    .addStringOption(option => option.setName('status').setDescription('すたーてす')),
 
   async execute(i, client,command) {
-    const target = i.options.getString('cmdname');
-    if(cmdname){
+    const status=i.options.getString('status');    
+    client.user.setStatus(status);
       const embed = new Discord.EmbedBuilder()
-      .setTitle("すみません。そのオプションにはまだ対応していません。")
-      .setColor(client.config.color.e)
+      .setTitle("ok")
+      .setColor(client.config.color.s)
       .setTimestamp();
+    
     return i.reply({ embeds: [embed] });
-    }
+    
     
   },
 }
