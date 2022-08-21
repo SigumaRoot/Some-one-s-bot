@@ -58,7 +58,7 @@ client.on("interactionCreate", async i => {
 
   // 実行
   try {
-    await command.execute(i, client);
+    await command.execute(i, client,command);
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${i.user.tag}(${i.user.id}) がコマンドを実行しました。`)
