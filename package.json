@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":  "node index.js",
+    "test": "node index.js",
     "start": "node index.js"
   },
   "keywords": [],
   "author": "SigumaRoot",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/builders": "^1.1.0",
     "@discordjs/rest": "^1.0.1",
     "@types/node": "^18.0.6",
     "discord-api-types": "^0.37.1",
