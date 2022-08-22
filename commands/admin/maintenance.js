@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder ,Activity } = require("discord.js");
 const Discord = require("discord.js");
 const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord.js');
 
@@ -16,13 +16,14 @@ module.exports = {
     const status=i.options.getString('status');
     const playing=i.options.getString('playing');
     client.user.setActivity(playing);
+    const member=guild.members.fetch(client.user.id);
     client.user.setStatus(status);
       const embed = new Discord.EmbedBuilder()
       .setTitle("ok")
       .setColor(client.config.color.s)
       .addFields([
-        { name: 'Status', value: ` ** ${client.user.status} ** ` }, 
-        { name: 'Playing', value: `** ${ client.user.playing } ** ` }])
+        { name: 'Status', value: ` ** ${member.presence.status} ** ` }, 
+        { name: 'Playing', value: `** ${ member.presence.activity } ** ` }])
       .setTimestamp();
     
     return i.reply({ embeds: [embed] });
