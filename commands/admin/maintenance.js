@@ -16,7 +16,7 @@ module.exports = {
     const status=i.options.getString('status');
     const playing=i.options.getString('playing');
     client.user.setActivity(playing);
-    const member=Discord.guild.members.fetch(client.user.id);
+    const member=i.guild.members.fetch(client.user.id);
     client.user.setStatus(status);
       const embed = new Discord.EmbedBuilder()
       .setTitle("ok")
