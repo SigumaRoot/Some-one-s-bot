@@ -11,12 +11,12 @@ module.exports = {
     let log = JSON.parse(jsonR);
     const add = require(`../system/add.js`);
     add.addCmd(client.config);
-    if(log.onoff=='on'){
-    client.user.setActivity(log.playing);
-    client.user.setStatus(log.status);}else{
-
-    client.user.setActivity(`Type /help | Servers: ${client.guilds.cache.size}`);
-    client.user.setStatus('online');
+    if (log.onoff == 'on') {
+      client.user.setActivity(log.playing);
+      client.user.setStatus(log.status);
+    } else {
+      client.user.setActivity(`Type /help | Servers: ${client.guilds.cache.size}`);
+      client.user.setStatus('online');
     }
     /*client.user.setActivity('activity', { type: 'WATCHING' });
 client.user.setActivity('activity', { type: 'LISTENING' });
