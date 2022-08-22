@@ -20,11 +20,9 @@ module.exports = {
       const embed = new Discord.EmbedBuilder()
       .setTitle("ok")
       .setColor(client.config.color.s)
-      .addFields([{
-        name:"Status",value:client.user.status
-      },{
-        name:"Playing",value:playing
-      }])
+      .addFields([
+        { name: 'Status', value: ` ** ${client.user.status} ** ` }, 
+        { name: 'Playing', value: `** ${ client.user.playing } ** ` }])
       .setTimestamp();
     
     return i.reply({ embeds: [embed] });
