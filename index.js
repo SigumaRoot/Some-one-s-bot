@@ -148,7 +148,7 @@ const app = express();
 // ルーティングの設定
 app.get("/", (req, res) => {
   const data = {
-    "message": "Hello world!",
+    "Status": "OK",
   }
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.json(data);
