@@ -10,7 +10,7 @@ module.exports = {
     .setName("maintenance")
     .setDescription("メンテモード")
     .addStringOption(option => option.setName('status').setDescription('すたーてす'))
-    .addStringOption(option => option.setName('Playing').setDescription('プレイ中に表示するやつ')),
+    .addStringOption(option => option.setName('playing').setDescription('プレイ中に表示するやつ')),
 
   async execute(i, client,command) {
     const status=i.options.getString('status');
