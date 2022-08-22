@@ -16,14 +16,10 @@ module.exports = {
     const status=i.options.getString('status');
     const playing=i.options.getString('playing');
     client.user.setActivity(playing);
-    const member=i.guild.members.resolve(client.user.id);
     client.user.setStatus(status);
       const embed = new Discord.EmbedBuilder()
       .setTitle("ok")
       .setColor(client.config.color.s)
-      .addFields([
-        { name: 'Status', value: ` ** ${member.presence.status} ** ` }, 
-        { name: 'Playing', value: `** ${ member.presence.activity } ** ` }])
       .setTimestamp();
     
     return i.reply({ embeds: [embed] });
