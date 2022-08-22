@@ -8,7 +8,6 @@ module.exports = {
     let jsonR = client.fs.readFileSync(`/home/runner/Bot/log/maintenance.log`, "utf8", function(err, result) {
       if (err) throw err;
     });
-    console.log(jsonR);
     let log = JSON.parse(jsonR);
     const add = require(`../system/add.js`);
     add.addCmd(client.config);
