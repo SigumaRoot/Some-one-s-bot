@@ -1,11 +1,15 @@
 const config = require("../config.js");
 const functions = require("../functions.js");
-const fs = require('fs');
+
 
 module.exports = {
   name: "ready", // イベント名
   async execute(client) {
-    let log = JSON.parse(fs.readFileSync(`../log/maintenance.log`, 'utf8'));
+    let jsonR = client.fs.readFileSync(`/home/runner/Bot/log/maintenance.log`, "utf8", function(err, result) {
+      if (err) throw err;
+    });
+    console.log(jsonR);
+    let log = JSON.parse(jsonR);
     const add = require(`../system/add.js`);
     add.addCmd(client.config);
     client.user.setActivity(log.playing);

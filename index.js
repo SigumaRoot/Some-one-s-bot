@@ -17,6 +17,7 @@ const loging = functions.loging;
 
 client.func = functions;
 client.config = config;
+client.fs=fs;
 
 const cmdH = require(`./system/command.js`);
 cmdH.handling(client, fs, Collection, config);
