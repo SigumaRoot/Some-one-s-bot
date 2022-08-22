@@ -21,7 +21,7 @@ module.exports = {
         .setTimestamp();
 
       i.reply({ embeds: [embed] });
-      return { status: status, playing: playing };
+      return `{ status: ${status}, playing: ${playing} }`;
     } catch (e) {
       throw e;
     }

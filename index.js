@@ -79,7 +79,7 @@ client.on("interactionCreate", async i => {
       .setDescription("```\n" + error + "\n```")
       .setColor(config.color.e)
       .setTimestamp();
-    client.channels.fetch(config.logch.error).then({ embeds: [logEmbedmbed] });
+    client.channels.fetch(config.logch.error).then({ embeds: [logEmbed] });
     const iEmbed = new EmbedBuilder()
       .setTitle("すみません、エラーが発生しました...")
       .setDescription("```\n" + error + "\n```")
@@ -135,7 +135,7 @@ client.on("messageCreate", async msg => {
       .setDescription("```\n" + error + "\n```")
       .setColor(config.color.e)
       .setTimestamp();
-    client.channels.fetch(config.logch.error).then({ embeds: [logEmbedmbed] });
+    client.channels.fetch(config.logch.error).then({ embeds: [logEmbed] });
     const iEmbed = new EmbedBuilder()
       .setTitle("すみません、エラーが発生しました...")
       .setDescription("```\n" + error + "\n```")
