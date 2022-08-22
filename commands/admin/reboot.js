@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Discord = require("discord.js");
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
