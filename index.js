@@ -74,9 +74,21 @@ client.on("interactionCreate", async i => {
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
   } catch (error) {
     console.error(error);
+    const logEmbed = new EmbedBuilder()
+      .setTitle("ERROR - cmd")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    client.channels.fetch(config.logch.error).then({ embeds: [logEmbedmbed] });
+    const iEmbed = new EmbedBuilder()
+      .setTitle("すみません、エラーが発生しました...")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    msg.reply(config.logch.error).then(c => c.send({ embeds: [iEmbed] }));
   }
+})
 
-});
 // コmsg
 client.on("messageCreate", async msg => {
   if (msg.content.indexOf(`s!`) !== 0) return;
@@ -118,6 +130,18 @@ client.on("messageCreate", async msg => {
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
   } catch (error) {
     console.error(error);
+    const logEmbed = new EmbedBuilder()
+      .setTitle("ERROR - cmd")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    client.channels.fetch(config.logch.error).then({ embeds: [logEmbedmbed] });
+    const iEmbed = new EmbedBuilder()
+      .setTitle("すみません、エラーが発生しました...")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    msg.reply(config.logch.error).then(c => c.send({ embeds: [iEmbed] }));
   }
 
 });
