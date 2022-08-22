@@ -34,7 +34,7 @@ module.exports = {
       .setImage(i.author.displayAvatarURL({ dynamic: true }))
       .setColor(color)
       .setTimestamp();
-    return i.reply({ embeds: [embed] })
-
+    i.reply({ embeds: [embed] })
+    return "No data";
   },
 }

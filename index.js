@@ -14,12 +14,13 @@ const client = new Client({
 
 const config = require("./config.js");
 const functions = require("./functions.js");
+const loging = functions.loging;
 
 client.func = functions;
 client.config = config;
 
-const cmdH=require(`./system/command.js`);
-cmdH.handling(client,fs,Collection,config);
+const cmdH = require(`./system/command.js`);
+cmdH.handling(client, fs, Collection, config);
 // イベントハンドリング
 const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 for (const file of eventFiles) {
@@ -58,7 +59,7 @@ client.on("interactionCreate", async i => {
 
   // 実行
   try {
-    await command.execute(i, client,command);
+    loging(await command.execute(i, client), i.commandName);
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${i.user.tag}(${i.user.id}) がコマンドを実行しました。`)
@@ -102,7 +103,7 @@ client.on("messageCreate", async msg => {
 
   // 実行
   try {
-    await command.execute(msg, client);
+    loging(await command.execute(msg, client), msg.content.replace('s!', ''));
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${msg.author.tag}(${msg.author.id}) がコマンドを実行しました。`)

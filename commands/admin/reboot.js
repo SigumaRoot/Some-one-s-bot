@@ -4,12 +4,14 @@ const Discord = require("discord.js");
 module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
   adminGuildOnly: true,
-  data: new SlashCommandBuilder() 
+  data: new SlashCommandBuilder()
     .setName("reboot")
     .setDescription("reboot"),
 
   async execute(i, client) {
     client.destroy();
     client.login(process.env.token);
+    i.replay("Sucsess!");
+    return "No data";
   },
 }

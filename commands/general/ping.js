@@ -13,10 +13,11 @@ module.exports = {
       .setTitle("Ping")
       .setDescription("Pong!")
       .addFields([
-        { name: 'WebSocket', value: ` ** ${client.ws.ping} ms ** ` }, 
-        { name: 'コマンド受信', value: `** ${ cmdPing } ms ** ` }])
+        { name: 'WebSocket', value: ` ** ${client.ws.ping} ms ** ` },
+        { name: 'コマンド受信', value: `** ${cmdPing} ms ** ` }])
       .setColor(client.config.color.s)
       .setTimestamp();
     i.reply({ embeds: [embed] });
+    return 'No data';
   },
 }
