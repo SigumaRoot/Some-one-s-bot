@@ -14,7 +14,7 @@ module.exports = {
 
   async execute(i, client,command) {
     const status=i.options.getString('status');
-    const playing=i.options.getString('Playing');
+    const playing=i.options.getString('playing');
     client.user.setActivity(playing);
     client.user.setStatus(status);
       const embed = new Discord.EmbedBuilder()
