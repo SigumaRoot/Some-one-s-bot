@@ -32,7 +32,6 @@ exports.loging = (data, cmdName) => {
     if (data == "err") {
         throw data;
     }
-    const option = { flag: "a" };
     // 書き込み
     fs.writeFile(`log/${cmdName}.log`, data, option, (err) => {
         if (err) throw err;
