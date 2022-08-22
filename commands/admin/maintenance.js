@@ -5,6 +5,7 @@ const { ApplicationCommandType, ApplicationCommandOptionType } = require('discor
 module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
   adminGuildOnly: true,
+  adminGuildOnly: true,
   data: new SlashCommandBuilder() // スラッシュコマンド登録のため
     .setName("maintenance")
     .setDescription("メンテモード")
