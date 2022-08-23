@@ -26,6 +26,12 @@ module.exports = {
         i.reply({ embeds: [embed] });
         return `{ "onoff":"on","status": "${status}", "playing": "${playing}" }`;
       } else {
+        const embed = new Discord.EmbedBuilder()
+          .setTitle("ok")
+          .setColor(client.config.color.s)
+          .setTimestamp();
+
+        i.reply({ embeds: [embed] });
         return `{ "onoff":"off"}`;
       }
     } catch (e) {
