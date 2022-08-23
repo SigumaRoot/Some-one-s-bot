@@ -11,7 +11,7 @@ module.exports = {
   async execute(i, client) {
     client.destroy();
     client.login(process.env.token);
-    i.replay("Sucsess!");
+    i.reply("Sucsess!");
     return "No data";
   },
 }
