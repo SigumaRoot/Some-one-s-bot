@@ -1,8 +1,8 @@
-# Siguma-chan-Discord
-This is source code of Discord Bot "Siguma-chan".
-This is Template.
+# Some-one-s-bot
+誰でも簡単にBotが作れるやつです。
 
-## Do you have questions?
-You can ask me!
-Discord User Tag:SigumaRoot #1421
+## 問い合わせ
+なんかあったら聞いてください。
+質問もおｋ。
+Discord User Tag : SigumaRoot #1421
 Discord Server:https://discord.gg/FMPcQ97ddf
