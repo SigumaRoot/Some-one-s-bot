@@ -1,5 +1,12 @@
 module.exports = {
-  BuildName:"",
+  BuildName:'Bot',
+  profile:{
+    name:"シグマちゃん"
+    ,server:"https://discord.gg/FMPcQ97ddf",
+    website:"",
+    author:"SigumaRoot #1421"
+  },
+
   clientId: process.env.clientId,
   color: {
     s:"0x1bff49",

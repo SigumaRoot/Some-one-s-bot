@@ -27,3 +27,14 @@ exports.timeToJST = function (timestamp, format = false) {
     }
     return return_str;
 }
+const fs = require('fs');
+exports.loging = (data, cmdName) => {
+    if (data == "err") {
+        throw data;
+    }
+    // 書き込み
+    fs.writeFile(`log/${cmdName}.log`, data, (err) => {
+        if (err) throw err;
+        console.log('正常に書き込みが完了しました');
+    });
+}

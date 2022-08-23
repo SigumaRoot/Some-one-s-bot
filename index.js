@@ -1,7 +1,7 @@
-const Discord = require("discord.js");
 const fs = require("fs");
 
-const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } = require("discord.js")
+const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } = require("discord.js");
+//import { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } from "discord.js";
 const client = new Client({
   'intents': [
     GatewayIntentBits.Guilds,
@@ -13,12 +13,14 @@ const client = new Client({
 
 const config = require("./config.js");
 const functions = require("./functions.js");
+const loging = functions.loging;
 
 client.func = functions;
 client.config = config;
+client.fs=fs;
 
-const cmdH=require(`./system/command.js`);
-cmdH.handling(client,fs,Collection,config);
+const cmdH = require(`./system/command.js`);
+cmdH.handling(client, fs, Collection, config);
 // イベントハンドリング
 const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 for (const file of eventFiles) {
@@ -57,7 +59,7 @@ client.on("interactionCreate", async i => {
 
   // 実行
   try {
-    await command.execute(i, client);
+    loging(await command.execute(i, client), i.commandName);
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${i.user.tag}(${i.user.id}) がコマンドを実行しました。`)
@@ -72,9 +74,21 @@ client.on("interactionCreate", async i => {
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
   } catch (error) {
     console.error(error);
+    const logEmbed = new EmbedBuilder()
+      .setTitle("ERROR - cmd")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    client.channels.fetch(config.logch.error).then({ embeds: [logEmbed] });
+    const iEmbed = new EmbedBuilder()
+      .setTitle("すみません、エラーが発生しました...")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    msg.reply(config.logch.error).then(c => c.send({ embeds: [iEmbed] }));
   }
+})
 
-});
 // コmsg
 client.on("messageCreate", async msg => {
   if (msg.content.indexOf(`s!`) !== 0) return;
@@ -101,7 +115,7 @@ client.on("messageCreate", async msg => {
 
   // 実行
   try {
-    await command.execute(msg, client);
+    loging(await command.execute(msg, client), msg.content.replace('s!', ''));
     const log = new EmbedBuilder()
       .setTitle("コマンド実行ログ")
       .setDescription(`${msg.author.tag}(${msg.author.id}) がコマンドを実行しました。`)
@@ -116,6 +130,18 @@ client.on("messageCreate", async msg => {
     client.channels.fetch(config.logch.command).then(c => c.send({ embeds: [log] }));
   } catch (error) {
     console.error(error);
+    const logEmbed = new EmbedBuilder()
+      .setTitle("ERROR - cmd")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    client.channels.fetch(config.logch.error).then({ embeds: [logEmbed] });
+    const iEmbed = new EmbedBuilder()
+      .setTitle("すみません、エラーが発生しました...")
+      .setDescription("```\n" + error + "\n```")
+      .setColor(config.color.e)
+      .setTimestamp();
+    msg.reply(config.logch.error).then(c => c.send({ embeds: [iEmbed] }));
   }
 
 });
@@ -147,7 +173,7 @@ const app = express();
 // ルーティングの設定
 app.get("/", (req, res) => {
   const data = {
-    "message": "Hello world!",
+    "Status": "OK",
   }
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.json(data);

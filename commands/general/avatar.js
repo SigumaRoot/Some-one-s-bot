@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Discord = require("discord.js");
-const { ApplicationCommandType, ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
@@ -35,7 +34,7 @@ module.exports = {
       .setImage(i.author.displayAvatarURL({ dynamic: true }))
       .setColor(color)
       .setTimestamp();
-    return i.reply({ embeds: [embed] })
-
+    i.reply({ embeds: [embed] })
+    return "No data";
   },
 }
