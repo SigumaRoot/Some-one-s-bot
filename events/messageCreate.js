@@ -5,6 +5,7 @@ const functions = require("../functions.js");
 module.exports = {
   name: "messageCreate", // イベント名
   async execute(msg,client) {
+    if (msg.author.bot) return;
     if (msg.content.indexOf(`s!`) !== 0) return;
     const command = client.commands.get(msg.content.replace('s!', ''));
     if (!command) return;
