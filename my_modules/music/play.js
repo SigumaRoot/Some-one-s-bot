@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require("discord.js");
+const spotify = require('./modules/spotify.js');
+const youtube = require('./modules/youtube.js');
 let subcmd = new SlashCommandBuilder()
     .setName('play')
     .setDescription('曲を再生')
     .addSubcommand(spotify.cmd)
     .addSubcommand(youtube.cmd);
-const spotify = require('./modules/spotify.js');
-const youtube = require('./modules/youtube.js');
 
 module.exports = {
     subcmd,
