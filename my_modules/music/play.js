@@ -3,9 +3,9 @@ const spotify = require('./modules/spotify.js');
 const youtube = require('./modules/youtube.js');
 let subcmd = new SlashCommandBuilder()
     .setName('play')
-    .setDescription('曲を再生')
-    .addSubcommand(option => option.setName('spotify').setDescription('spotifyの音声を再生').addStringOption(option => option.setName('url').setDescription('urlを入力')))
-    .addSubcommand(option => option.setName('youtube').setDescription('youtubeの音声を再生').addStringOption(option => option.setName('url').setDescription('urlを入力')));
+    .setDescription('曲を再生');
+    //.addSubcommand(option => option.setName('spotify').setDescription('spotifyの音声を再生').addStringOption(option => option.setName('url').setDescription('urlを入力')))
+    //.addSubcommand(option => option.setName('youtube').setDescription('youtubeの音声を再生').addStringOption(option => option.setName('url').setDescription('urlを入力')));
 
 module.exports = {
     subcmd,
