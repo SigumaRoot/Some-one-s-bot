@@ -9,66 +9,44 @@ module.exports = {
         .setName("play")
         .setDescription("音楽を再生します")
         .addStringOption((option) =>
-            option.setName("url").setDescription("YouTube URL").setRequired(true)
+            option.setName("query").setDescription("YouTube URL").setRequired(true)
         ),
 
-    async execute(i, client) {
-        const bot = await i.guild.members.resolve(client.user.id);
-
-        if (!i.member.voice.channelId) {
-            await i.reply({
-                content: "ボイスチャンネルに参加してください",
-                ephemeral: true,
-            });
+    async execute(interaction, client) {
+        if (!interaction.member.voice.channelId) {
+            await interaction.reply({ content: "vcに参加してください！！", ephemeral: true });
+            return 'No data'
+        }
+        if (interaction.guild.members.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId) {
+            await interaction.reply({ content: "ボットと同じvcに参加してください！！", ephemeral: true });
             return 'No data';
         }
 
-        if (
-            bot.voice.channelId &&
-            i.member.voice.channelId !==
-            bot.voice.channelId
-        ) {
-            await i.reply({
-                content: "botと同じボイスチャンネルに参加してください",
-                ephemeral: true,
-            });
-            return 'No data';
-        }
-
-        // キューを生成
-        const queue = client.player.createQueue(i.guild, {
+        const query = interaction.options.getString("query");
+        const queue = client.player.createQueue(interaction.guild, {
             metadata: {
-                channel: i.channel,
-            },
+                channel: interaction.channel
+            }
         });
 
+        // verify vc connection
         try {
-            // VCに入ってない場合、VCに参加する
-            if (!queue.connection) {
-                await queue.connect(i.member.voice.channel);
-            }
+            if (!queue.connection) await queue.connect(interaction.member.voice.channel);
         } catch {
             queue.destroy();
-            await i.reply({
-                content: "ボイスチャンネルに参加できませんでした",
-                ephemeral: true,
-            });
+            await interaction.reply({ content: "すみません。vcに参加できませんでした...", ephemeral: true });
             return 'No data';
         }
 
-        //await i.deferReply();
+        await interaction.deferReply();
 
-        const url = i.options.getString("url");
         // 入力されたURLからトラックを取得
-        const track = await client.player
-            .search(url, {
-                requestedBy: i.user,
-                searchEngine: QueryType.YOUTUBE_VIDEO,
-            })
-            .then((x) => x.tracks[0]);
+        const track = await client.player.search(query, {
+            requestedBy: interaction.user
+        }).then(x => x.tracks[0]);
 
         if (!track) {
-            i.reply({
+            interaction.reply({
                 content: "動画が見つかりませんでした",
             });
             return 'No data';
@@ -82,7 +60,7 @@ module.exports = {
             queue.play();
         }
 
-        await i.reply({
+        await interaction.reply({
             content: `音楽をキューに追加しました **${track.title}**`,
         });
         return 'No data';
