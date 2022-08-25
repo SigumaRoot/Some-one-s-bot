@@ -49,7 +49,7 @@ for (const file of eventFiles) {
 
 // コマンドが来た時
 client.on("interactionCreate", async i => {
-  if (!interaction.isChatInputCommand()) return;
+  if (!i.isChatInputCommand()) return;
   console.log(i.commandName);
   if (!i.isCommand()) return;
   const command = client.commands.get(i.commandName);
