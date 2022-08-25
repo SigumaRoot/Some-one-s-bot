@@ -46,9 +46,7 @@ module.exports = {
         }).then(x => x.tracks[0]);
 
         if (!track) {
-            interaction.reply({
-                content: "動画が見つかりませんでした",
-            });
+            await interaction.followUp({ content: `❌ | **${query}**は見つかりませんでした...` })
             return 'No data';
         }
 
@@ -60,7 +58,7 @@ module.exports = {
             queue.play();
         }
 
-        await interaction.reply({
+        await interaction.followUp({
             content: `音楽をキューに追加しました **${track.title}**`,
         });
         return 'No data';
