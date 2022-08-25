@@ -46,7 +46,7 @@ module.exports = {
         }).then(x => x.tracks[0]);
 
         if (!track) {
-            await interaction.followUp({ content: `❌ | **${query}**は見つかりませんでした...` })
+            await interaction.editReply({ content: `❌ | **${query}**は見つかりませんでした...` })
             return 'No data';
         }
 
@@ -58,7 +58,7 @@ module.exports = {
             queue.play();
         }
 
-        await interaction.followUp({
+        await interaction.editReply({
             content: `音楽をキューに追加しました **${track.title}**`,
         });
         return 'No data';
