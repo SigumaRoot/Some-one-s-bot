@@ -1,11 +1,13 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { execute } = require("./music");
 
 module.exports = {
+  adminGuildOnry: true,
   data: new SlashCommandBuilder()
     .setName("quit")
     .setDescription("再生を停止してbotを終了します"),
 
-  run: async ({ client, interaction }) => {
+  async execute(client, interaction) {
     const queue = client.player.getQueue(interaction.guildId);
 
     if (!queue) {
