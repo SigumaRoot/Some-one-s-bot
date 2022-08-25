@@ -1,59 +1,80 @@
-const { SlashCommandBuilder } = require("discord.js");
-const Discord = require("discord.js");
-const { Player } = require("discord-player");
-const play = require(`${process.cwd()}/my_modules/music/play.js`);
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { QueryType } = require("discord-player");
+
 module.exports = {
-    guildOnly: true, // サーバー専用コマンドかどうか
-    adminGuildOnly: true,
-    data: new SlashCommandBuilder()
-        .setName("music")
-        .addSubcommandGroup(play.subcmd),
+  data: new SlashCommandBuilder()
+    .setName("play")
+    .setDescription("音楽を再生します")
+    .addStringOption((option) =>
+      option.setName("url").setDescription("YouTube URL").setRequired(true)
+    ),
 
-    async execute(i, client) {
-        client.player = new Player(client);
-        if (!i.member.voice.channelId) {
-            return await i.reply({
-                content: "ボイスチャンネルに参加してください",
-                ephemeral: true,
-            });
-        }
+  run: async ({ client, interaction }) => {
+    if (!interaction.member.voice.channelId) {
+      return await interaction.reply({
+        content: "ボイスチャンネルに参加してください",
+        ephemeral: true,
+      });
+    }
 
-        if (
-            i.guild.me.voice.channelId &&
-            i.member.voice.channelId !==
-            i.guild.me.voice.channelId
-        ) {
-            return await i.reply({
-                content: "botと同じボイスチャンネルに参加してください",
-                ephemeral: true,
-            });
-        }
+    if (
+      interaction.guild.me.voice.channelId &&
+      interaction.member.voice.channelId !==
+        interaction.guild.me.voice.channelId
+    ) {
+      return await interaction.reply({
+        content: "botと同じボイスチャンネルに参加してください",
+        ephemeral: true,
+      });
+    }
 
-        // キューを生成
-        const queue = client.player.createQueue(i.guild, {
-            metadata: {
-                channel: i.channel,
-            },
-        });
+    // キューを生成
+    const queue = client.player.createQueue(interaction.guild, {
+      metadata: {
+        channel: interaction.channel,
+      },
+    });
 
-        try {
-            // VCに入ってない場合、VCに参加する
-            if (!queue.connection) {
-                await queue.connect(i.member.voice.channel);
-            }
-        } catch {
-            queue.destroy();
-            return await i.reply({
-                content: "ボイスチャンネルに参加できませんでした",
-                ephemeral: true,
-            });
-        }
-        await i.deferReply();
+    try {
+      // VCに入ってない場合、VCに参加する
+      if (!queue.connection) {
+        await queue.connect(interaction.member.voice.channel);
+      }
+    } catch {
+      queue.destroy();
+      return await interaction.reply({
+        content: "ボイスチャンネルに参加できませんでした",
+        ephemeral: true,
+      });
+    }
 
-        const group = interaction.options._group;
+    await interaction.deferReply();
 
-        const command = require(`${process.cwd()}/my_module/music/${group}.js`);
-        return command.excuse(client, i, queue);
+    const url = interaction.options.getString("url");
+    // 入力されたURLからトラックを取得
+    const track = await client.player
+      .search(url, {
+        requestedBy: interaction.user,
+        searchEngine: QueryType.YOUTUBE_VIDEO,
+      })
+      .then((x) => x.tracks[0]);
 
-    },
-}
+    if (!track) {
+      return await interaction.followUp({
+        content: "動画が見つかりませんでした",
+      });
+    }
+
+    // キューにトラックを追加
+    await queue.addTrack(track);
+
+    // 音楽が再生中ではない場合、再生
+    if (!queue.playing) {
+      queue.play();
+    }
+
+    return await interaction.followUp({
+      content: `音楽をキューに追加しました **${track.title}**`,
+    });
+  },
+};
