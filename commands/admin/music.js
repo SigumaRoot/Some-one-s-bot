@@ -56,7 +56,7 @@ module.exports = {
             return 'No data';
         }
 
-        await i.deferReply();
+        //await i.deferReply();
 
         const url = i.options.getString("url");
         // 入力されたURLからトラックを取得
@@ -68,7 +68,7 @@ module.exports = {
             .then((x) => x.tracks[0]);
 
         if (!track) {
-            await i.followUp({
+            i.reply({
                 content: "動画が見つかりませんでした",
             });
             return 'No data';
@@ -82,7 +82,7 @@ module.exports = {
             queue.play();
         }
 
-        await i.followUp({
+        await i.reply({
             content: `音楽をキューに追加しました **${track.title}**`,
         });
         return 'No data';
