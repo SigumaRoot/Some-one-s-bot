@@ -21,9 +21,9 @@ module.exports = {
         }
 
         if (
-            i.guild.id &&
+            i.guild.me.id &&
             i.member.voice.channelId !==
-            i.guild.id
+            i.guild.me.id
         ) {
             return await i.reply({
                 content: "botと同じボイスチャンネルに参加してください",
