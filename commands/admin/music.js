@@ -21,10 +21,11 @@ module.exports = {
         }
 
         if (
-            i.guild.me.displayName &&
+            i.guild.id &&
             i.member.voice.channelId !==
-            i.guild.me.displayName
+            i.guild.id
         ) {
+            i.guild.me.setNickname('ニックネーム')
             return await i.reply({
                 content: "botと同じボイスチャンネルに参加してください",
                 ephemeral: true,
