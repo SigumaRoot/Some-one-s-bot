@@ -24,7 +24,7 @@ module.exports = {
         if (
             bot.voice.channelId &&
             i.member.voice.channelId !==
-            bot.channelId
+            bot.voice.channelId
         ) {
             return await i.reply({
                 content: "botと同じボイスチャンネルに参加してください",
