@@ -15,10 +15,11 @@ module.exports = {
     async execute(i, client) {
         const bot = await i.guild.members.resolve(client.user.id);
         if (!i.member.voice.channelId) {
-            return await i.reply({
+            await i.reply({
                 content: "ボイスチャンネルに参加してください",
                 ephemeral: true,
             });
+            return 'No data';
         }
 
         if (
@@ -26,10 +27,11 @@ module.exports = {
             i.member.voice.channelId !==
             bot.voice.channelId
         ) {
-            return await i.reply({
+            await i.reply({
                 content: "botと同じボイスチャンネルに参加してください",
                 ephemeral: true,
             });
+            return 'No data';
         }
 
         // キューを生成
@@ -46,15 +48,17 @@ module.exports = {
             }
         } catch {
             queue.destroy();
-            return await i.reply({
+            await i.reply({
                 content: "ボイスチャンネルに参加できませんでした",
                 ephemeral: true,
             });
+            return 'No data';
         }
 
         await i.deferReply();
 
         const url = i.options.getString("url");
+        console.log('def url')
         // 入力されたURLからトラックを取得
         const track = await client.player
             .search(url, {
@@ -62,23 +66,28 @@ module.exports = {
                 searchEngine: QueryType.YOUTUBE_VIDEO,
             })
             .then((x) => x.tracks[0]);
-
+        console.log('get url');
         if (!track) {
-            return await i.followUp({
+            console.log('not found');
+            await i.followUp({
                 content: "動画が見つかりませんでした",
             });
+            return 'No data';
         }
 
         // キューにトラックを追加
         await queue.addTrack(track);
+        console.log('added');
 
         // 音楽が再生中ではない場合、再生
         if (!queue.playing) {
             queue.play();
+            console.log('play track');
         }
 
-        return await i.followUp({
+        await i.followUp({
             content: `音楽をキューに追加しました **${track.title}**`,
         });
+        return 'No data';
     },
 };
