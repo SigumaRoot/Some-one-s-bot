@@ -12,8 +12,8 @@ module.exports = {
             option.setName("url").setDescription("YouTube URL").setRequired(true)
         ),
 
-    async execute(client, i) {
-        if (!i.member?.voice.channelId) {
+    async execute(i, client) {
+        if (!i.member.voice.channelId) {
             return await i.reply({
                 content: "ボイスチャンネルに参加してください",
                 ephemeral: true,
