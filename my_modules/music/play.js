@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require("discord.js");
 let subcmd = new SlashCommandBuilder()
     .setName('play')
-    .setDescription('曲を再生');
+    .setDescription('曲を再生')
+    .addSubcommand(spotify.cmd)
+    .addSubcommand(youtube.cmd);
 const spotify = require('./modules/spotify.js');
 const youtube = require('./modules/youtube.js');
-
-subcmd.addSubcommand(spotify.cmd).addSubcommand(youtube.cmd);
 
 module.exports = {
     subcmd,
@@ -32,7 +32,7 @@ module.exports = {
 
         // キューにトラックを追加
         await queue.addTrack(track);
-        
+
         // 音楽が再生中ではない場合、再生
         if (!queue.playing) {
             queue.play();
