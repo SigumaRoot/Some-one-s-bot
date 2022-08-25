@@ -21,7 +21,7 @@ module.exports = {
         }
 
         if (
-            i.guild.me.voice.channelId &&
+            i.guild.id &&
             i.member.voice.channelId !==
             i.guild.me.voice.channelId
         ) {

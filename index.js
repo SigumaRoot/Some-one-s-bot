@@ -89,7 +89,7 @@ client.on("interactionCreate", async i => {
       .setDescription("```\n" + error + "\n```")
       .setColor(config.color.e)
       .setTimestamp();
-    i.reply(config.logch.error).then(c => c.send({ embeds: [iEmbed] }));
+    i.reply({embeds:[iEmbed]});
   }
 })
 
