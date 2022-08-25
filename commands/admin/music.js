@@ -13,7 +13,7 @@ module.exports = {
         ),
 
     async execute(i, client) {
-        const bot = await i.guild.member.fetch(client.user.id);
+        const bot = await i.guild.members.resolv(client.user.id);
         if (!i.member.voice.channelId) {
             return await i.reply({
                 content: "ボイスチャンネルに参加してください",
