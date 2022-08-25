@@ -1,8 +1,9 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { execute } = require("./music");
 
 module.exports = {
-  adminGuildOnry: true,
+  guildOnly: false, // サーバー専用コマンドかどうか
+  adminGuildOnly: true,
+
   data: new SlashCommandBuilder()
     .setName("quit")
     .setDescription("再生を停止してbotを終了します"),

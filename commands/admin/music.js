@@ -2,7 +2,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { QueryType } = require("discord-player");
 
 module.exports = {
-    adminGuildOnry: true,
+    guildOnly: false, // サーバー専用コマンドかどうか
+    adminGuildOnly: true,
 
     data: new SlashCommandBuilder()
         .setName("play")
