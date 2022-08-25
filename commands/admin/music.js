@@ -38,7 +38,7 @@ module.exports = {
             return 'No data';
         }
 
-        await interaction.deferReply();
+        //await interaction.deferReply();
 
         // 入力されたURLからトラックを取得
         const track = await client.player.search(query, {
@@ -46,7 +46,7 @@ module.exports = {
         }).then(x => x.tracks[0]);
 
         if (!track) {
-            await interaction.editReply({ content: `❌ | **${query}**は見つかりませんでした...` })
+            await interaction.reply({ content: `❌ | **${query}**は見つかりませんでした...` })
             return 'No data';
         }
 
@@ -58,7 +58,7 @@ module.exports = {
             queue.play();
         }
 
-        await interaction.editReply({
+        await interaction.reply({
             content: `音楽をキューに追加しました **${track.title}**`,
         });
         return 'No data';
