@@ -16,6 +16,9 @@ const config = require("./config.js");
 const functions = require("./functions.js");
 const loging = functions.loging;
 
+const { Player } = require("discord-player");
+client.player = new Player(client);
+
 client.func = functions;
 client.config = config;
 client.fs=fs;
