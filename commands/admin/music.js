@@ -13,7 +13,7 @@ module.exports = {
         ),
 
     async execute(client, interaction) {
-        if (!interaction.member.voice.channelId) {
+        if (!interaction.member?.voice.channelId) {
             return await interaction.reply({
                 content: "ボイスチャンネルに参加してください",
                 ephemeral: true,
