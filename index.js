@@ -3,11 +3,17 @@ const fs = require("fs");
 const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } = require("discord.js");
 //import { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } from "discord.js";
 const client = new Client({
-  'intents': [
+  /*'intents': [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildVoiceStates,
     GatewayIntentBits.MessageContent
+  ],*/
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.MESSAGE_CONTENT,
+    Intents.FLAGS.GUILD_VOICE_STATES,
   ],
   'partials': [Partials.Channel]
 });
