@@ -12,7 +12,7 @@ module.exports = {
             option.setName("url").setDescription("YouTube URL").setRequired(true)
         ),
 
-    async excute(client, interaction) {
+    async execute(client, interaction) {
         if (!interaction.member.voice.channelId) {
             await interaction.reply({
                 content: "ボイスチャンネルに参加してください",
@@ -20,7 +20,7 @@ module.exports = {
             });
             return 'No data';
         }
-
+//const bot = await i.guild.members.resolve(client.user.id);
         if (
             interaction.guild.me.voice.channelId &&
             interaction.member.voice.channelId !==
