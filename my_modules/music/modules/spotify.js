@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { excuse } = require("../play");
 
 let cmd = new SlashCommandBuilder();
 
