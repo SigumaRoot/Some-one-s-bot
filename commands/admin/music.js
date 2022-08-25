@@ -13,6 +13,7 @@ module.exports = {
         ),
 
     async execute(i, client) {
+        const bot = await message.guild.member.fetch(client.user.id);
         if (!i.member.voice.channelId) {
             return await i.reply({
                 content: "ボイスチャンネルに参加してください",
@@ -21,11 +22,10 @@ module.exports = {
         }
 
         if (
-            i.guild.id &&
+            bot.voice.channelId &&
             i.member.voice.channelId !==
-            i.guild.id
+            bot.channelId
         ) {
-            i.guild.me.setNickname('ニックネーム')
             return await i.reply({
                 content: "botと同じボイスチャンネルに参加してください",
                 ephemeral: true,
