@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { QueryType } = require("discord-player");
+const { query } = require("express");
 
 module.exports = {
     guildOnly: false, // サーバー専用コマンドかどうか
@@ -22,45 +23,41 @@ module.exports = {
             return 'No data';
         }
 
-        const query = interaction.options.getString("query");
-        const queue = client.player.createQueue(interaction.guild, {
-            metadata: {
-                channel: interaction.channel
-            }
-        });
-
         // verify vc connection
         try {
-            if (!queue.connection) await queue.connect(interaction.member.voice.channel);
+            interaction.member.voiceChannel.join();
         } catch {
             queue.destroy();
             await interaction.reply({ content: "すみません。vcに参加できませんでした...", ephemeral: true });
             return 'No data';
         }
 
-        //await interaction.deferReply();
+        const ytdl = require('ytdl-core');
+        const {
+            AudioPlayerStatus,
+            StreamType,
+            createAudioPlayer,
+            createAudioResource,
+            joinVoiceChannel,
+        } = require('@discordjs/voice');
+        const connection = joinVoiceChannel({
+            channelId: voiceChannel.id,
+            guildId: guild.id,
+            adapterCreator: guild.voiceAdapterCreator,
+        });
 
-        // 入力されたURLからトラックを取得
-        const track = await client.player.search(query, {
-            requestedBy: interaction.user
-        }).then(x => x.tracks[0]);
-
-        if (!track) {
+        const stream = ytdl(query, { filter: 'audioonly' });
+        const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
+        const player = createAudioPlayer();
+        if (!stream) {
             await interaction.reply({ content: `❌ | **${query}**は見つかりませんでした...` })
             return 'No data';
         }
+        player.play(resource);
+        connection.subscribe(player);
 
-        // キューにトラックを追加
-        await queue.addTrack(track);
-
-        // 音楽が再生中ではない場合、再生
-        if (!queue.playing) {
-            queue.play();
-        }
-
-        await interaction.reply({
-            content: `音楽をキューに追加しました **${track.title}**`,
-        });
+        player.on(AudioPlayerStatus.Idle, () => connection.destroy());
+        await interaction.reply(`**${query}**を再生！！`)
         return 'No data';
     },
 };

@@ -125,6 +125,7 @@
     "on-finished": "^2.4.1",
     "onetime": "^5.1.2",
     "optionator": "^0.8.3",
+    "opusscript": "^0.0.8",
     "parse-cache-control": "^1.0.1",
     "parse5": "^7.0.0",
     "parse5-htmlparser2-tree-adapter": "^7.0.0",
