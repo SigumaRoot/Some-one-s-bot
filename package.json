@@ -1,35 +1,25 @@
 {
-  "name": "some-one-s-bot",
+  "name": "siguma-chan-bot",
   "version": "1.0.0",
-  "description": "誰でも簡単にBotが作れるやつです。",
+  "description": "",
   "main": "index.js",
-  "dependencies": {
-    "@discordjs/builders": "^1.2.0",
-    "@discordjs/rest": "^1.1.0",
-    "@discordjs/voice": "^0.11.0",
-    "discord-api-types": "^0.37.5",
-    "discord-player": "^5.3.1",
-    "discord.js": "^14.3.0",
-    "express": "^4.18.1",
-    "ffmpeg-static": "^5.0.2",
-    "fs": "^0.0.1-security",
-    "opusscript": "^0.0.8",
-    "ws": "^8.8.1",
-    "youtube-dl-exec": "^1.3.4",
-    "youtube-sr": "^4.3.1",
-    "ytdl-core": "^4.11.0"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js",
+    "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SigumaRoot/Some-one-s-bot.git"
-  },
+  "keywords": [],
   "author": "SigumaRoot",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SigumaRoot/Some-one-s-bot/issues"
-  },
-  "homepage": "https://github.com/SigumaRoot/Some-one-s-bot#readme"
+  "dependencies": {
+    "@discordjs/builders": "^1.2.0",
+    "@discordjs/rest": "^1.0.1",
+    "@types/node": "^18.0.6",
+    "discord-api-types": "^0.37.1",
+    "discord-player": "^5.3.1",
+    "discord.js": "^14.2.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.2.6"
+  }
 }

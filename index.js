@@ -16,15 +16,9 @@ const config = require("./config.js");
 const functions = require("./functions.js");
 const loging = functions.loging;
 
-const { Player } = require("discord-player");
-client.player = new Player(client);
-
-// add the trackStart event so when a song will be played this message will be sent
-client.player.on("trackStart", (queue, track) => queue.metadata.channel.send(`🎶 | **${track.title}**を再生中!`))
-
 client.func = functions;
 client.config = config;
-client.fs = fs;
+client.fs=fs;
 
 const cmdH = require(`./system/command.js`);
 cmdH.handling(client, fs, Collection, config);
@@ -49,7 +43,6 @@ for (const file of eventFiles) {
 
 // コマンドが来た時
 client.on("interactionCreate", async i => {
-  if (!i.isChatInputCommand()) return;
   console.log(i.commandName);
   if (!i.isCommand()) return;
   const command = client.commands.get(i.commandName);
@@ -93,7 +86,7 @@ client.on("interactionCreate", async i => {
       .setDescription("```\n" + error + "\n```")
       .setColor(config.color.e)
       .setTimestamp();
-    i.reply({ embeds: [iEmbed] });
+    i.reply(config.logch.error).then(c => c.send({ embeds: [iEmbed] }));
   }
 })
 

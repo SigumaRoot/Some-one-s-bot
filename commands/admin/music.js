@@ -1,63 +1,82 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { QueryType } = require("discord-player");
-const { query } = require("express");
 
 module.exports = {
-  guildOnly: false, // サーバー専用コマンドかどうか
-  adminGuildOnly: true,
+    adminGuildOnry: true,
 
-  data: new SlashCommandBuilder()
-    .setName("play")
-    .setDescription("音楽を再生します")
-    .addStringOption((option) =>
-      option.setName("query").setDescription("YouTube URL").setRequired(true)
-    ),
+    data: new SlashCommandBuilder()
+        .setName("play")
+        .setDescription("音楽を再生します")
+        .addStringOption((option) =>
+            option.setName("url").setDescription("YouTube URL").setRequired(true)
+        ),
 
-  async execute(interaction, client) {
-    const queue=interaction.options.getString('query');
-    if (!interaction.member.voice.channelId) {
-      await interaction.reply({ content: "vcに参加してください！！", ephemeral: true });
-      return 'No data'
-    }
-    if (interaction.guild.members.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId) {
-      await interaction.reply({ content: "ボットと同じvcに参加してください！！", ephemeral: true });
-      return 'No data';
-    }
+    async execute(client, interaction) {
+        if (!interaction.member.voice.channelId) {
+            return await interaction.reply({
+                content: "ボイスチャンネルに参加してください",
+                ephemeral: true,
+            });
+        }
 
-    // verify vc connection
-    try {
-      interaction.members.voice.channel.join();
-    } catch {
-      await interaction.reply({ content: "すみません。vcに参加できませんでした...", ephemeral: true });
-      return 'No data';
-    }
+        if (
+            interaction.guild.me.voice.channelId &&
+            interaction.member.voice.channelId !==
+            interaction.guild.me.voice.channelId
+        ) {
+            return await interaction.reply({
+                content: "botと同じボイスチャンネルに参加してください",
+                ephemeral: true,
+            });
+        }
 
-    const ytdl = require('ytdl-core');
-    const {
-      AudioPlayerStatus,
-      StreamType,
-      createAudioPlayer,
-      createAudioResource,
-      joinVoiceChannel,
-    } = require('@discordjs/voice');
-    const connection = joinVoiceChannel({
-      channelId: voiceChannel.id,
-      guildId: guild.id,
-      adapterCreator: guild.voiceAdapterCreator,
-    });
+        // キューを生成
+        const queue = client.player.createQueue(interaction.guild, {
+            metadata: {
+                channel: interaction.channel,
+            },
+        });
 
-    const stream = ytdl(query, { filter: 'audioonly' });
-    const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
-    const player = createAudioPlayer();
-    if (!stream) {
-      await interaction.reply({ content: `❌ | **${query}**は見つかりませんでした...` })
-      return 'No data';
-    }
-    player.play(resource);
-    connection.subscribe(player);
+        try {
+            // VCに入ってない場合、VCに参加する
+            if (!queue.connection) {
+                await queue.connect(interaction.member.voice.channel);
+            }
+        } catch {
+            queue.destroy();
+            return await interaction.reply({
+                content: "ボイスチャンネルに参加できませんでした",
+                ephemeral: true,
+            });
+        }
 
-    player.on(AudioPlayerStatus.Idle, () => connection.destroy());
-    await interaction.reply(`**${query}**を再生！！`)
-    return 'No data';
-  },
+        await interaction.deferReply();
+
+        const url = interaction.options.getString("url");
+        // 入力されたURLからトラックを取得
+        const track = await client.player
+            .search(url, {
+                requestedBy: interaction.user,
+                searchEngine: QueryType.YOUTUBE_VIDEO,
+            })
+            .then((x) => x.tracks[0]);
+
+        if (!track) {
+            return await interaction.followUp({
+                content: "動画が見つかりませんでした",
+            });
+        }
+
+        // キューにトラックを追加
+        await queue.addTrack(track);
+
+        // 音楽が再生中ではない場合、再生
+        if (!queue.playing) {
+            queue.play();
+        }
+
+        return await interaction.followUp({
+            content: `音楽をキューに追加しました **${track.title}**`,
+        });
+    },
 };
