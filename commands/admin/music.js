@@ -14,6 +14,7 @@ module.exports = {
     ),
 
   async execute(interaction, client) {
+    const queue=interaction.options.getString('query');
     if (!interaction.member.voice.channelId) {
       await interaction.reply({ content: "vcに参加してください！！", ephemeral: true });
       return 'No data'
@@ -25,9 +26,8 @@ module.exports = {
 
     // verify vc connection
     try {
-      interaction.member.voiceChannel.join();
+      interaction.members.voice.channel.join();
     } catch {
-      queue.destroy();
       await interaction.reply({ content: "すみません。vcに参加できませんでした...", ephemeral: true });
       return 'No data';
     }
