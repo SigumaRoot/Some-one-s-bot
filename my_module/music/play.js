@@ -30,7 +30,7 @@ module.exports = {
         connection.subscribe(player);
 
         // 動画の音源を取得
-        const stream = ytdl(ytdl.getURLVideoID(url), {
+        const stream = ytdl(ytdl.getURLVideoID(query), {
             filter: format => format.audioCodec === 'opus' && format.container === 'webm', //webm opus
             quality: 'highest',
             highWaterMark: 32 * 1024 * 1024, // https://github.com/fent/node-ytdl-core/issues/902
