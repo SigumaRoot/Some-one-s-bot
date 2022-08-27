@@ -2,7 +2,18 @@ const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, 
 const ytdl = require('ytdl-core');
 
 module.exports = {
-    async execute(i, query, player) {
+    async execute(i, query) {
+        // チャンネルに参加
+        const connection = joinVoiceChannel({
+            adapterCreator: channel.guild.voiceAdapterCreator,
+            channelId: channel.id,
+            guildId: channel.guild.id,
+            selfDeaf: true,
+            selfMute: false,
+        });
+        const player = createAudioPlayer();
+        connection.subscribe(player);
+
         // 動画の音源を取得
         const stream = ytdl(ytdl.getURLVideoID(query), { filter: 'audioonly' });
         const resource = createAudioResource(stream);
