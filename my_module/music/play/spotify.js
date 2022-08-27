@@ -2,7 +2,7 @@ const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, 
 const ytdl = require('spdl-core');
 
 module.exports = {
-    execute(i, query, player) {
+    async execute(i, query, player) {
         let source;
         spdl.getInfo(query).then(infos => {
             source = spdl(query);

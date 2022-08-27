@@ -2,7 +2,7 @@ const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, 
 const ytdl = require('ytdl-core');
 
 module.exports = {
-    execute(i, query, player) {
+    async execute(i, query, player) {
         // 動画の音源を取得
         const stream = ytdl(ytdl.getURLVideoID(query), { filter: 'audioonly' });
         const resource = createAudioResource(stream);
