@@ -1,13 +1,13 @@
 const ytdl = require('ytdl-core');
-const {SlashCommandBuilder} = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
-module.exports={
+module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
   adminGuildOnly: true,
-  data: new SlashCommandBuilder() 
+  data: new SlashCommandBuilder()
     .setName("music")
     .setDescription("音楽関係")
-    .addSubcomand(subcommand => 
+    .addSubcommand(subcommand => 
       subcommand
         .setName('play')
         .setDescription('再生')
@@ -15,10 +15,11 @@ module.exports={
           option
             .setName('query')
             .setDescription('urlなど'))),
-          async execute(i,client){
-            const subCmdName = i.options.getSubcommand();
-            const subCmd = require(`${process.cwd()}/my_module/music/${subCmdName}.js`);
-            const responce = subCmd.execute(i,client,ytdl);
-            return responce;
-          }
+  
+  async execute(i, client) {
+    const subCmdName = i.options.getSubcommand();
+    const subCmd = require(`${process.cwd()}/my_module/music/${subCmdName}.js`);
+    const responce = subCmd.execute(i, client, ytdl);
+    return responce;
+  }
 };
