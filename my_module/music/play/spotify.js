@@ -3,6 +3,9 @@ const spdl = require('spdl-core');
 
 module.exports = {
     async execute(i, query) {
+        const guild = i.guild;
+        const member = await guild.members.fetch(i.member.id);
+        const channel = member.voice.channel;
 
         // チャンネルに参加
         const connection = joinVoiceChannel({
