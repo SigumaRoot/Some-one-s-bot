@@ -10,7 +10,7 @@ module.exports = {
         }
 
         // コマンドを実行したメンバーがいるボイスチャンネルを取得
-        const channel = i.members.voice.channel;
+        const channel = i.member.voice.channel;
 
         // コマンドを実行したメンバーがボイスチャンネルに入ってなければ処理を止める
         if (!channel) {
