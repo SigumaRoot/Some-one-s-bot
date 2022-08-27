@@ -22,6 +22,8 @@ module.exports = {
         const stream = ytdl(ytdl.getURLVideoID(query), { filter: 'audioonly' });
         const resource = createAudioResource(stream);
 
+        console.log('1');
+
         // 再生
         player.play(resource)
         i.reply(`${query}を再生します！！`)
