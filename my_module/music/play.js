@@ -3,7 +3,7 @@ const ytdl=require('ytdl-core');
 const spdl = require('spdl-core');
 
 module.exports = {
-    async execute(i, client, ytdl) {
+    async execute(i, client) {
         const guild = i.guild;
         const member = await guild.members.fetch(i.member.id);
         const channel = member.voice.channel;
