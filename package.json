@@ -22,7 +22,9 @@
     "fs": "^0.0.1-security",
     "node-fetch": "^3.2.6",
     "opusscript": "^0.0.8",
+    "play-dl": "^1.9.5",
     "spdl-core": "^2.0.2",
+    "spottydl": "^0.1.6",
     "tweetnacl": "^1.0.3",
     "ytdl-core": "^4.11.1"
   }

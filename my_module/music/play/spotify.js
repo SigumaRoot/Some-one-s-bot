@@ -1,9 +1,11 @@
 const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, StreamType } = require('@discordjs/voice');
-const spdl = require('spdl-core');
+const play = require('play-dl');
+const { video_basic_info, stream } = require('play-dl');
+const  SpottyDL  =  require ( 'spottydl' ) 
 
 module.exports = {
     async execute(i, query) {
-        const guild = i.guild;
+        /*const guild = i.guild;
         const member = await guild.members.fetch(i.member.id);
         const channel = member.voice.channel;
 
@@ -36,7 +38,14 @@ module.exports = {
         await entersState(player, AudioPlayerStatus.Idle, 24 * 60 * 60 * 1000);
 
         // 再生が終了したら抜ける
-        connection.destroy();
+        connection.destroy();*/
+
+        await SpottyDL.getTrack(query)
+            .then(async (results) => {
+                let track = await SpottyDL.downloadTrack(results, "~ /somePath")  // 2 番目のパラメーターはオプションです... 
+                console.log(track)
+            });
+
         return 'No data';
     }
 }
