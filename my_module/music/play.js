@@ -1,6 +1,4 @@
 const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, StreamType } = require('@discordjs/voice');
-const fs = require('fs');
-const spdl = require('spdl-core').default;
 
 module.exports = {
     async execute(i, client, ytdl) {
