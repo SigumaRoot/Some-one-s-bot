@@ -18,10 +18,8 @@ module.exports = {
         const player = createAudioPlayer();
         connection.subscribe(player);
 
-        let source;
-        spdl.getInfo(query).then(infos => {
-            source = spdl(query);
-        });
+        spdl.getInfo(query);
+        const source = spdl(query);
         const resource = createAudioResource(source);
 
         // 再生
