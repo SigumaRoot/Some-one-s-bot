@@ -6,7 +6,8 @@ const client = new Client({
   'intents': [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates
   ],
   'partials': [Partials.Channel]
 });
@@ -17,7 +18,7 @@ const loging = functions.loging;
 
 client.func = functions;
 client.config = config;
-client.fs=fs;
+client.fs = fs;
 
 const cmdH = require(`./system/command.js`);
 cmdH.handling(client, fs, Collection, config);

@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
   guildOnly: false, // サーバー専用コマンドかどうか
-  adminGuildOnly: true,
+  adminGuildOnly: false,
   data: new SlashCommandBuilder()
     .setName("music")
     .setDescription("音楽関係")
