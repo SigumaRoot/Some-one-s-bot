@@ -19,7 +19,11 @@ module.exports = {
         connection.subscribe(player);
 
         spdl.getInfo(query);
-        const source = spdl(query);
+        const source = spdl(query, {
+                        filter: "audioonly",
+                        highWaterMark: 1 << 25,
+                        quality: "highestaudio"
+                    });
         const resource = createAudioResource(source);
 
         // 再生
