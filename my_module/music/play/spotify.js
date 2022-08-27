@@ -22,9 +22,10 @@ module.exports = {
         spdl.getInfo(query).then(infos => {
             source = spdl(query);
         });
+        const resource = createAudioResource(source);
 
         // 再生
-        player.play(source);
+        player.play(resource);
         i.reply(`${query}を再生します！！`)
         await entersState(player, AudioPlayerStatus.Playing, 10 * 1000);
         await entersState(player, AudioPlayerStatus.Idle, 24 * 60 * 60 * 1000);
