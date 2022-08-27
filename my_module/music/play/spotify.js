@@ -24,7 +24,10 @@ module.exports = {
                         highWaterMark: 1 << 25,
                         quality: "highestaudio"
                     });
-        const resource = createAudioResource(source);
+        const resource = createAudioResource(source, {
+            inlineVolume: true,
+            inputType: StreamType.Raw
+        });
 
         // 再生
         player.play(resource);
