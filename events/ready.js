@@ -26,5 +26,6 @@ client.user.setStatus('idle');
 client.user.setStatus('dnd');
 client.user.setStatus('invisible');*/ client.channels.cache.get(config.logch.ready).send("Discordログインしました！");
     console.log(`[${functions.timeToJST(Date.now(), true)}] Logged in as ${client.user.tag}!`);
+    const spotifyApp = require(`${process.cwd()}/system/app.js`);
   }
 }
