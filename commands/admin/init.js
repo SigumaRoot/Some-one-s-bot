@@ -18,7 +18,7 @@ module.exports = {
         } else {
             i.guild.channels.create('Bot Config', { type: "GUILD_CATEGORY" });
             i.guild.channels.create(client.user.username);
-            let configCh = i.guild.channels.cache.find(client.user.username);
+            /*let configCh = i.guild.channels.cache.find(client.user.username);
             let role = i.guilds.roles.fetch();
             configCh.permissionOverwrites.set([
                 {
@@ -26,7 +26,7 @@ module.exports = {
                     deny: 535529191505, // 許可しない権限
                     //type: "IDを指定する場合は必要" // role or member
                 }
-            ], 'Config channel.');
+            ], 'Config channel.');*/
             i.reply('sucsess.')
         }
     },
