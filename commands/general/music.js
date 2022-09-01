@@ -6,14 +6,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("music")
     .setDescription("音楽関係")
-    .addSubcommand(subcommand =>
-      subcommand
-        .setName('play')
-        .setDescription('再生')
-        .addStringOption(option =>
-          option
-            .setName('query')
-            .setDescription('urlなど'))),
+    .addSubcommand(require(`${process.cwd()}/my_module/play.js`).data),
 
   async execute(i, client) {
     const subCmdName = i.options.getSubcommand();

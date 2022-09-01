@@ -1,8 +1,16 @@
 const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, StreamType } = require('@discordjs/voice');
+const { EmbedBuilder, SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('discord.js');
 const ytdl = require('ytdl-core');
 const spdl = require('spdl-core');
 
 module.exports = {
+    data: new SlashCommandSubcommandBuilder()
+        .setName('Play')
+        .setDescription('音楽を再生します。')
+        .addStringOption(option =>
+            option
+                .setName('query')
+                .setDescription('urlを入力')),
     async execute(i, client) {
         const guild = i.guild;
         const member = await guild.members.fetch(i.member.id);
