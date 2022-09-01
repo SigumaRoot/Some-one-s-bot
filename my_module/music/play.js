@@ -5,7 +5,7 @@ const spdl = require('spdl-core');
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
-        .setName('Play')
+        .setName('play')
         .setDescription('音楽を再生します。')
         .addStringOption(option =>
             option
