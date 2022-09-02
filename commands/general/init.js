@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js");
 
 module.exports = {
-  guildOnly: false, // サーバー専用コマンドかどうか
-  adminguildOnly: true,
+  guildOnly: true, // サーバー専用コマンドかどうか
+  //adminguildOnly: true,
   data: new SlashCommandBuilder()
     .setName("init")
     .setDescription("サーバーでボットを使えるようにします。"),
@@ -19,7 +19,7 @@ module.exports = {
       return 'No data';
     } else {
       i.guild.channels.create({ name: 'Bot Config', type: 4 }).then(cate =>
-        i.guild.channels.create({ name: client.user.id, reason: 'Bot Config(Do　not edit！)', type: 0, parent: cate }).then(ch => ch.permissionOverwrites.set([{
+        i.guild.channels.create({ name: client.user.id, topic: 'Bot Config(Do　not edit！)', type: 0, parent: cate }).then(ch => ch.permissionOverwrites.set([{
           id: i.guild.roles.everyone,
           //すべての人(everyone)の権限設定
           deny: ['67584']
