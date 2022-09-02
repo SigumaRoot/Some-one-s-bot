@@ -1,6 +1,8 @@
-entrypoint = "index.js"
+run = ["kill 1","node index.js"]
 
 hidden = [".config"]
+
+entrypoint = "index.js"
 
 [interpreter]
 command = [
