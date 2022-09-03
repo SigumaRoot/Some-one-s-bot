@@ -111,22 +111,5 @@ process.on("unhandledRejection", (reason, promise) => {
   client.channels.fetch(config.logch.error).then(c => c.send({ embeds: [embed] }));
 });
 
-// APIサーバー (UptimeRobot用)
-const express = require("express");
-const app = express();
-
-// ルーティングの設定
-app.get("/", (req, res) => {
-  const data = {
-    "Status": "OK",
-  }
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.json(data);
-});
-
-app.listen(3000, () => {
-  console.log(`Opened API Server`);
-});
-
 // ログイン
 client.login(config.token);
