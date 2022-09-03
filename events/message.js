@@ -3,7 +3,7 @@ const functions = require("../functions.js");
 
 
 module.exports = {
-  name: "messageCreate", // イベント名
+  name: "message", // イベント名
   async execute(msg,client) {
     if (msg.content.length==50)msg.delete();
     if (msg.content.indexOf(`s!`) !== 0) return;
