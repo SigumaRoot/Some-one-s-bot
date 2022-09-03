@@ -1,8 +1,11 @@
-const { ShardingManager} = require('discord.js');
+const { ShardingManager } = require('discord.js');
 
-const manager = new ShardingManager('./bot.js',{token:process.env.token});
+const manager = new ShardingManager('./bot.js', {
+  token: process.env.token,
+                                               totalShards: "auto",
+});
 
-manager.on('shardCreate',shard=>console.log(`Launched shard ${shard.id}`));
+manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 
 // APIサーバー (UptimeRobot用)
 const express = require("express");
