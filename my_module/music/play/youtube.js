@@ -2,19 +2,11 @@ const { entersState, AudioPlayerStatus, createAudioPlayer, createAudioResource, 
 const ytdl = require('ytdl-core');
 
 module.exports = {
-    async execute(i, query) {
+    async execute(i, query,connection) {
         const guild = i.guild;
         const member = await guild.members.fetch(i.member.id);
         const channel = member.voice.channel;
-
-        // チャンネルに参加
-        const connection = joinVoiceChannel({
-            adapterCreator: channel.guild.voiceAdapterCreator,
-            channelId: channel.id,
-            guildId: channel.guild.id,
-            selfDeaf: true,
-            selfMute: false,
-        });
+ 
         const player = createAudioPlayer();
         connection.subscribe(player);
 

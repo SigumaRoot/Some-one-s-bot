@@ -23,15 +23,6 @@
     "ffmpeg-static": "^5.0.2",
     "fs": "^0.0.1-security",
     "fs-extra": "^10.1.0",
-    "isomorphic-unfetch": "^3.1.0",
-    "node-fetch": "^3.2.6",
-    "opusscript": "^0.0.8",
-    "querystring": "^0.2.1",
-    "request": "^2.88.2",
-    "spdl-core": "^2.0.2",
-    "spotify-url-info": "^3.1.4",
-    "spottydl": "^0.1.6",
-    "yt-search": "^2.10.3",
-    "ytdl-core": "^4.11.1"
+    "opusscript": "^0.0.8"
   }
 }
