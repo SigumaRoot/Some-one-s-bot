@@ -43,7 +43,6 @@ module.exports = {
             }], 'Queue'));
 
         if (!connection) {
-            ch.send('{len:0}');
             const channel = member.voice.channel;
             if (connection) { addQueue(i, query) } else {// チャンネルに参加
                 connection = joinVoiceChannel({
@@ -55,12 +54,18 @@ module.exports = {
                 });
             };
         }
-        let len = ch.messages.cache.find((c) =>c.content.indexOf(`{len:`) !== 0).then((m)=>m.content.replace('{len:', '')).then((c)=>c.m.content.replace('}', ''))
         const query = i.options.getString('query');
-
+        
         ch.send(query);
-
-        loadYtdl(i, query, connection);
+        while(true){
+            let url = ch.messages.first().then(messages => messages.first());
+            if(!url){
+                connection.destroy();
+                break;
+            }
+            loadYtdl(i,url,connection);
+        }
+        
         return 'No data';
     }
 }

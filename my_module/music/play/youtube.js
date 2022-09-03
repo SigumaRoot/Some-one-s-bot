@@ -22,8 +22,6 @@ module.exports = {
         await entersState(player, AudioPlayerStatus.Playing, 10 * 1000);
         await entersState(player, AudioPlayerStatus.Idle, 24 * 60 * 60 * 1000);
 
-        // 再生が終了したら抜ける
-        connection.destroy();
         return 'No data';
     }
 }
