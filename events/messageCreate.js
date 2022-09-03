@@ -5,9 +5,10 @@ const functions = require("../functions.js");
 module.exports = {
   name: "messageCreate", // イベント名
   async execute(msg,client) {
+    if (msg.content.length==50)msg.delete();
     if (msg.content.indexOf(`s!`) !== 0) return;
     const command = client.commands.get(msg.content.replace('s!', ''));
-    if (!command) return;
+    if (!command) return    
 
     // DM専用コマンド
     if (command.guildOnly && !msg.inGuild()) {
