@@ -1,4 +1,4 @@
-import { SlushCommandBuilder, EmbedBuilder } from 'discord.js';
+const { SlushCommandBuilder, EmbedBuilder } =require('discord.js');
 
 module.exports = {
     data: new SlushCommandBuilder()
