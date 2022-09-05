@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandSubcommandBuilder } = require('discord.js');
 
 module.exports = {
-    data: new SlushCommandBuilder()
+    data: new SlashCommandSubcommandBuilder()
         .setName('resume')
         .setDescription('resume')
         .addStringOption(option => option.setName('url')),
