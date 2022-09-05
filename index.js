@@ -14,7 +14,17 @@ cron.schedule('0 */5 * * * *', () =>
   }));
 
 const { Player } = require('discord-player');
+const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } = require("discord.js");
 
+const client = new Client({
+  'intents': [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates
+  ],
+  'partials': [Partials.Channel]
+});
 const player = new Player(client, {
   leaveOnEnd: true,
   leaveOnStop: true,
@@ -29,17 +39,7 @@ client.player = player;
 
 const fs = require("fs");
 
-const { Client, GatewayIntentBits, Collection, Partials, EmbedBuilder } = require("discord.js");
 
-const client = new Client({
-  'intents': [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildVoiceStates
-  ],
-  'partials': [Partials.Channel]
-});
 
 const config = require("./config.js");
 const functions = require("./functions.js");
