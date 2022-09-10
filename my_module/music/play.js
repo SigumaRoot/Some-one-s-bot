@@ -9,10 +9,10 @@ module.exports = {
     let voiceChannel = i.member.voice.channel;
     if (!voiceChannel) return i.reply(`VCに参加してください！！`);
 
-    let search_Song = i.options.getString('url').join(" ");
+    let search_Song = i.options.getString('url');
     if (!search_Song) return i.reply(`曲名もしくはリンクを入力してください！！`);
 
-    let queue = player.createQueue(i.guild.id, {
+    let queue = client.player.createQueue(i.guild.id, {
       metadata: {
         channel: i.channel,
       },
