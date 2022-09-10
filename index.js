@@ -7,7 +7,7 @@ cron.schedule('0 */5 * * * *', () =>
       return
     }
     console.log(stdout)
-    if (stdout.match(/429/)) {
+    if (stdout.match(/1015/)) {
       exec('kill 1');
     }
 
