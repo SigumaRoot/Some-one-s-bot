@@ -7,10 +7,10 @@ module.exports = {
     .addStringOption(option => option.setName('url').setDescription('url')),
   async execute(i, client) {
     let voiceChannel = i.member.voice.channel;
-    if (!voiceChannel) return i.reply(`You Need to Join Voice Channel`);
+    if (!voiceChannel) return i.reply(`VCに参加してください！！`);
 
-    let search_Song = args.join(" ");
-    if (!search_Song) return i.reply(`Type Song name or Link`);
+    let search_Song = i.options.getStringOption('url').join(" ");
+    if (!search_Song) return i.reply(`曲名もしくはリンクを入力してください！！`);
 
     let queue = player.createQueue(i.guild.id, {
       metadata: {
@@ -24,7 +24,7 @@ module.exports = {
     } catch {
       queue.destroy();
       return await i.reply({
-        content: "Could not join your voice channel!",
+        content: "VCに参加できませんでした！！",
         ephemeral: true,
       });
     }
@@ -34,10 +34,10 @@ module.exports = {
         requestedBy: i.author,
       })
       .then((x) => x.tracks[0]);
-    if (!song) return i.reply(` I cant Find \`${search_Song}\` `);
+    if (!song) return i.reply(`\`${search_Song}\` を見つけられませんでした。。。`);
 
     queue.play(song);
 
-    i.reply({ content: `⏱️ | Loading track **${song.title}**!` });
+    i.reply({ content: `⏱️ |**${song.title}**をロード中。。。` });
   }
 }
