@@ -12,7 +12,7 @@ module.exports = {
     let search_Song = i.options.getString('url');
     if (!search_Song) return i.reply(`曲名もしくはリンクを入力してください！！`);
 
-    let queue = client.player.createQueue(i.guild.id, {
+    let queue = client.client.player.createQueue(i.guild.id, {
       metadata: {
         channel: i.channel,
       },
@@ -29,7 +29,7 @@ module.exports = {
       });
     }
 
-    let song = await player
+    let song = await client.player
       .search(search_Song, {
         requestedBy: i.author,
       })
