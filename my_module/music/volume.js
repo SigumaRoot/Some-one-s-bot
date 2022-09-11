@@ -4,7 +4,7 @@ module.exports = {
     data: new SlashCommandSubcommandBuilder()
         .setName('volume')
         .setDescription('volume')
-        .addStringOption(option => option.setName('url')),
+        ,
     async execute(i, client) {
         let queue = client.player.getQueue(i.guild.id);
     let amount = parseInt(args[0]);
