@@ -35,7 +35,7 @@ module.exports = {
       })
       .then((x) => x.tracks[0]);
     if (!song) return i.reply(`\`${search_Song}\` を見つけられませんでした。。。`);
-    await queue.setVolume(70);
+    await queue.setVolume(25);
     queue.play(song);
 
     i.reply({ content: `⏱️ |**${song.title}**をロード中。。。` });
