@@ -4,13 +4,13 @@ module.exports = {
   data: new SlashCommandSubcommandBuilder()
     .setName('play')
     .setDescription('play')
-    .addStringOption(option => option.setName('url').setDescription('url').setRequired(true)),
+    .addStringOption(option => option.setName('query').setDescription('query').setRequired(true)),
   async execute(i, client) {
     let voiceChannel = i.member.voice.channel;
-    if (!voiceChannel) return i.reply(`VCに参加してください！！`);
+    if (!voiceChannel) return i.editReply(`VCに参加してください！！`);
 
-    let search_Song = i.options.getString('url');
-    if (!search_Song) return i.reply(`曲名もしくはリンクを入力してください！！`);
+    let search_Song = i.options.getString('query');
+    if (!search_Song) return i.editReply(`曲名もしくはリンクを入力してください！！`);
 
     let queue = client.player.createQueue(i.guild.id, {
       metadata: {
@@ -23,7 +23,7 @@ module.exports = {
       if (!queue.connection) await queue.connect(voiceChannel);
     } catch {
       queue.destroy();
-      return await i.reply({
+      return await i.editReply({
         content: "VCに参加できませんでした！！",
         ephemeral: true,
       });
@@ -34,10 +34,10 @@ module.exports = {
         requestedBy: i.author,
       })
       .then((x) => x.tracks[0]);
-    if (!song) return i.reply(`\`${search_Song}\` を見つけられませんでした。。。`);
+    if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
     await queue.setVolume(25);
     queue.play(song);
 
-    i.reply({ content: `⏱️ |**${song.title}**をロード中。。。` });
+    i.editReply({ content: `⏱️ |**${song.title}**をロード中。。。` });
   }
 }

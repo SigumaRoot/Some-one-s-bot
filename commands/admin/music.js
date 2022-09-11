@@ -16,11 +16,12 @@ for (let cmd of req){
 
 
 module.exports = {
-  //adminGuildOnly: true,
+  adminGuildOnly: true,
   guildOnly: false, // サーバー専用コマンドかどうか
   data,
 
   async execute(i, client) {
+    await i.deferReply();
     const cmd = i.options.getSubcommand();
     const cmf = require(`${process.cwd()}/my_module/music/${cmd}.js`) ;
     cmf.execute(i,client);
