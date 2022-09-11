@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandSubcommandBuilder()
     .setName('play')
     .setDescription('play')
-    .addStringOption(option => option.setName('url').setDescription('url').setRequire(true)),
+    .addStringOption(option => option.setName('url').setDescription('url').setRequired(true)),
   async execute(i, client) {
     let voiceChannel = i.member.voice.channel;
     if (!voiceChannel) return i.reply(`VCに参加してください！！`);
