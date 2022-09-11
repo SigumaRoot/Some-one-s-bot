@@ -1,12 +1,18 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Discord = require("discord.js");
 
-const req = require('require-dir');
+const reqDir = require('require-dir');
+const reqObj = reqDir(`${process.cwd()}/my_module/music/`) ;
 
+const req = Object.values(reqObj);
 
 const data = new SlashCommandBuilder() // スラッシュコマンド登録のため
-    .setName("music");
+    .setName("music")
     .setDescription('music');
+
+for (let cmd of req){
+  data.addSubcommand(cmd);
+}
 
 
 module.exports = {
