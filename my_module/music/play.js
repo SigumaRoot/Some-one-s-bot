@@ -41,7 +41,7 @@ module.exports = {
     switch (song.type) {
       case "playlist":
         i.editReply({ content: `⏱️ |**${song[0].title}**と、ほか${song.length()-1}をロード中。。。` });
-        for(let trackN = 0,trackN < song.length(),trackN++){
+        for(let trackN = 0;trackN < song.length();trackN++){
           queue.play(song[trackN]);
         }
         break;
