@@ -33,7 +33,7 @@ module.exports = {
     let song = await client.player
       .search(search_Song, {
         requestedBy: i.author,
-        searchEngine: QueryType.YOUTUBE_PLAYLIST
+        searchEngine: QueryType.AUTO
     });
 
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
@@ -47,13 +47,14 @@ module.exports = {
         break;
     
       default:
-        queue.play(song[0]);
+        queue.play(song);
+        i.editReply({ content: `⏱️ |**${song.title}**と、をロード中。。。` });
         break;
     }
 
     await queue.setVolume(25);
     queue.play(song);
 
-    i.editReply({ content: `⏱️ |**${song.title}**をロード中。。。` });
+    
   }
 }
