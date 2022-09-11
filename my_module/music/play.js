@@ -32,6 +32,8 @@ module.exports = {
     let song = await client.player
       .search(search_Song, {
         requestedBy: i.author,
+        searchEngine: QueryType.AUTO,
+        type:'playlist'
       })
       .then((x) => x.tracks[0]);
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
