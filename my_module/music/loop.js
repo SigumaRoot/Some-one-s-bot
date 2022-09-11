@@ -8,15 +8,15 @@ module.exports = {
         .addStringOption(option => 
             option.setName('type')
             .setDescription('タイプを選択')
-            .addChoice('TRACK')),
-    async execute(i, client) {
-        let type;
-        switch(i.options.getString('type')){
-            case TRACK:
-                type = QueueRepeatMode.TRACK;
-        }
+            .addChoices(
+                { name: 'OFF', value: QueueRepeatMode.OFF },
+				{ name: 'TRACK', value: QueueRepeatMode.TRACK },
+				{ name: 'QUEUE', value: QueueRepeatMode.QUEUE },
+				{ name: 'AUTO PLAY', value: QueueRepeatMode.AUTOPLAY },
+			)),
+    async execute(i, client) {        
         let queue = client.player.getQueue(i.guild.id);
-        queue.setRepeatMode(type);
-        i.reply(`ループ設定完了！！次も同じ曲を再生します！！`);
+        queue.setRepeatMode(i.options.getString(type));
+        i.reply(`ループ設定完了！！`);
     }
 }
