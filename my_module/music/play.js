@@ -47,8 +47,8 @@ module.exports = {
         break;
     
       default:
-        queue.play(song);
-        i.editReply({ content: `⏱️ |**${song.title}**と、をロード中。。。` });
+        queue.play(song[0]);
+        i.editReply({ content: `⏱️ |**${song[0].title}**と、をロード中。。。` });
         break;
     }
 
