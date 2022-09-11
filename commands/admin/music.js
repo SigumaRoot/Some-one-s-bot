@@ -16,8 +16,8 @@ for (let cmd of req){
 
 
 module.exports = {
-  adminGuildOnly: true,
-  guildOnly: false, // サーバー専用コマンドかどうか
+  //adminGuildOnly: true,
+  guildOnly: true, // サーバー専用コマンドかどうか
   data,
 
   async execute(i, client) {
