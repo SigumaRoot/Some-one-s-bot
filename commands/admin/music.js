@@ -11,7 +11,7 @@ const data = new SlashCommandBuilder() // スラッシュコマンド登録の�
     .setDescription('music');
 
 for (let cmd of req){
-  data.addSubcommand(cmd);
+  data.addSubcommand(cmd.data);
 }
 
 
