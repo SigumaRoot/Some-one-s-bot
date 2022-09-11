@@ -3,11 +3,11 @@ const { SlashCommandSubcommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandSubcommandBuilder()
         .setName('resume')
-        .setDescription('resume')
-        .addStringOption(option => option.setName('url')),
+        .setDescription('再開'),
     async execute(i, client) {
-        let queue = player.getQueue(i.guild.id);
-    queue.setPaused(false);
-    i.reply(`Song Resumed`);
+        let queue = client.player.getQueue(i.guild.id);
+        if(!queue)return i.reply('何も再生してません！！');
+        queue.setPaused(false);
+        i.reply(`一時停止を解除しました！！`);
     }
 }

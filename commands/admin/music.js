@@ -1,12 +1,24 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Discord = require("discord.js");
 
-module.exports = {
-  adminGuildOnly: true,
-  guildOnly: false, // サーバー専用コマンドかどうか
-  data: new SlashCommandBuilder() // スラッシュコマンド登録のため
+const reqDir = require('require-dir');
+const reqObj = reqDir(`${process.cwd()}/my_module/music/`) ;
+
+const req = Object.values(reqObj);
+
+const data = new SlashCommandBuilder() // スラッシュコマンド登録のため
     .setName("music")
-    .setDescription("music").addSubcommand(require(`${process.cwd()}/my_module/music/play.js`).data),
+    .setDescription('music');
+
+for (let cmd of req){
+  data.addSubcommand(cmd.data);
+}
+
+
+module.exports = {
+  //adminGuildOnly: true,
+  guildOnly: false, // サーバー専用コマンドかどうか
+  data,
 
   async execute(i, client) {
     const cmd = i.options.getSubcommand();
