@@ -6,7 +6,7 @@ module.exports = {
         .setDescription('ループ設定'),
     async execute(i, client) {
         let queue = client.player.getQueue(i.guild.id);
-        queue.setRepeatMode(queue);
+        queue.setRepeatMode(true);
         i.reply(`ループ設定完了！！次も同じ曲を再生します！！`);
     }
 }

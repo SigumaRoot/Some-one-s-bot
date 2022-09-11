@@ -6,7 +6,7 @@ module.exports = {
         .setDescription('スキップ'),
     async execute(i, client) {
         let queue = client.player.getQueue(i.guild.id);
-        queue.stop();
+        queue.skip();
         i.reply(`スキップしました！！`);
     }
 }
