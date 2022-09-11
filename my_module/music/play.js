@@ -33,7 +33,7 @@ module.exports = {
     let song = await client.player
       .search(search_Song, {
         requestedBy: i.author,
-        searchEngine: QueryType.AUTO
+        searchEngine: QueryType.YOUTUBE_PLAYLIST
     });
 
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
