@@ -38,23 +38,15 @@ module.exports = {
 
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
     
-    switch (song.type) {
-      case "playlist":
-        i.editReply({ content: `⏱️ |**${song[0].title}**と、ほか${song.length()-1}をロード中。。。` });
-        for(let trackN = 0;trackN < song.length();trackN++){
-          queue.play(song[trackN]);
+    if(song.playlist){ 
+        i.editReply({ content: `⏱️ |**${song.tracks[0].title}**と、ほか${song.tracks.length}をロード中。。。` });
+        for(let trackN = 0;trackN < song.tracks.length;trackN++){
+          queue.play(song.tracks[trackN]);
+        }}else{
+        queue.play(song.tracks[0]);
+        i.editReply({ content: `⏱️ |**${song.tracks[0].title}**をロード中。。。` });
         }
-        break;
-    
-      default:
-        queue.play(song[0]);
-        i.editReply({ content: `⏱️ |**${song[0].title}**と、をロード中。。。` });
-        break;
-    }
 
-    await queue.setVolume(25);
-    queue.play(song);
-
-    
+    await queue.setVolume(25);    
   }
 }
