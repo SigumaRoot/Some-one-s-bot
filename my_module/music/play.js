@@ -34,8 +34,7 @@ module.exports = {
         requestedBy: i.author,
         searchEngine: QueryType.AUTO,
         type:'playlist'
-      })
-      .then((x) => x.tracks[0]);
+      });
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
     await queue.setVolume(25);
     queue.play(song);
