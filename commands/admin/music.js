@@ -21,6 +21,7 @@ module.exports = {
   data,
 
   async execute(i, client) {
+    i.defer();
     const cmd = i.options.getSubcommand();
     const cmf = require(`${process.cwd()}/my_module/music/${cmd}.js`) ;
     cmf.execute(i,client);

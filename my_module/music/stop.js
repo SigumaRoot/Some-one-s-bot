@@ -6,8 +6,8 @@ module.exports = {
         .setDescription('ストップ（消す）'),
     async execute(i, client) {
         let queue = client.player.getQueue(i.guild.id);
-        if(!queue)return i.reply('何も再生してません！！');
+        if(!queue)return i.sendFollowUp('何も再生してません！！');
         queue.stop();
-        i.reply(`VCから抜けました！！`);
+        i.sendFollowUp(`VCから抜けました！！`);
     }
 }

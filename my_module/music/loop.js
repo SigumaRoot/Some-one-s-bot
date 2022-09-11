@@ -35,8 +35,8 @@ module.exports = {
 
 
         let queue = client.player.getQueue(i.guild.id);
-        if(!queue)return i.reply('何も再生してません！！');
+        if(!queue)return i.sendFollowUp('何も再生してません！！');
         queue.setRepeatMode(type);
-        i.reply(`ループ設定完了！！`);
+        i.sendFollowUp(`ループ設定完了！！`);
     }
 }
