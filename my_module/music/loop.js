@@ -16,7 +16,7 @@ module.exports = {
 			)),
     async execute(i, client) {        
         let type;
-        switch (i.options.getString(type)) {
+        switch (i.options.getString('type')) {
             case 'OFF':
                 type = QueueRepeatMode.OFF;
                 break;
