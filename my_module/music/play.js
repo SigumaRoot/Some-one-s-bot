@@ -1,9 +1,9 @@
 const { SlashCommandSubcommandBuilder } = require('discord.js');
 const { QueryType } = require('discord-player');
 
-const wait= (sec)=> {
- 
-  return new Promise(resolve => setTimeout(resolve, sec*1000));
+const wait = (sec) => {
+
+  return new Promise(resolve => setTimeout(resolve, sec * 1000));
 
 }
 
@@ -19,13 +19,11 @@ module.exports = {
     let search_Song = i.options.getString('query');
     if (!search_Song) return i.editReply(`曲名もしくはリンクを入力してください！！`);
 
-    let queue = client.player.getQueue(i.guild.id);
-    if(!queue){
     queue = client.player.createQueue(i.guild.id, {
       metadata: {
         channel: i.channel,
       },
-    });}
+    });
 
     // verify vc connection
     try {
@@ -42,24 +40,23 @@ module.exports = {
       .search(search_Song, {
         requestedBy: i.author,
         searchEngine: QueryType.AUTO
-    });
+      });
 
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
-    
-    if(song.playlist){
-        i.editReply({ content: `⏱️ |プレイリスト：**${song.playlist.title}**をロード中。。。` });
-        for(let trackN = 0;trackN < song.tracks.length;trackN++){
-          console.log('Lording...');
-          queue = client.player.getQueue(i.guild.id);
-          while (queue.previousTracks.length > 1) {
-            await wait(30);
-          }
-          queue.play(song.tracks[trackN]).then(l => console.log(song.tracks[trackN].title)).catch(e => console.log(e));
-        }}else{
-        queue.play(song.tracks[0]);
-        i.editReply({ content: `⏱️ |**${song.tracks[0].title}**をロード中。。。` });
-        }
-
-    await queue.setVolume(25);    
+    await queue.setVolume(25);
+    if (song.playlist) {
+      i.editReply({ content: `⏱️ |プレイリスト：**${song.playlist.title}**をロード中。。。` });
+      for (let trackN = 0; trackN < song.tracks.length; trackN++) {
+        if(!await client.player.getQueue(i.guild.id))return;
+        console.log('Lording...');
+        await queue.play(song.tracks[trackN]).then(l => {
+          console.log(song.tracks[trackN].title);
+        })
+        await wait(5);        
+      }
+    } else {
+      queue.play(song.tracks[0]);
+      i.editReply({ content: `⏱️ |**${song.tracks[0].title}**をロード中。。。` });
+    }
   }
 }
