@@ -1,6 +1,12 @@
 const { SlashCommandSubcommandBuilder } = require('discord.js');
 const { QueryType } = require('discord-player');
 
+const wait= (sec)=> {
+ 
+  return new Promise(resolve => setTimeout(resolve, sec*1000));
+
+}
+
 module.exports = {
   data: new SlashCommandSubcommandBuilder()
     .setName('play')
@@ -46,7 +52,7 @@ module.exports = {
           console.log('Lording...');
           queue = client.player.getQueue(i.guild.id);
           while (queue.previousTracks.length > 1) {
-            await delay(30);
+            await wait(30);
           }
           queue.play(song.tracks[trackN]).then(l => console.log(song.tracks[trackN].title)).catch(e => console.log(e));
         }}else{
