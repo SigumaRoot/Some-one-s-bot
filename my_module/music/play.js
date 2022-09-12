@@ -13,11 +13,13 @@ module.exports = {
     let search_Song = i.options.getString('query');
     if (!search_Song) return i.editReply(`曲名もしくはリンクを入力してください！！`);
 
-    let queue = client.player.createQueue(i.guild.id, {
+    let queue = client.player.getQueue(i.guild.id);
+    if(!queue){
+    queue = client.player.createQueue(i.guild.id, {
       metadata: {
         channel: i.channel,
       },
-    });
+    });}
 
     // verify vc connection
     try {
@@ -41,6 +43,7 @@ module.exports = {
     if(song.playlist){
         i.editReply({ content: `⏱️ |**${song.tracks[0].title}**と、ほか${song.tracks.length}をロード中。。。` });
         for(let trackN = 0;trackN < song.tracks.length;trackN++){
+          queue = client.player.getQueue(i.guild.id);
           while (queue.tracks.length > 11) {
             wait(60);
           }
