@@ -38,9 +38,12 @@ module.exports = {
 
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
     
-    if(song.playlist){ 
+    if(song.playlist){
         i.editReply({ content: `⏱️ |**${song.tracks[0].title}**と、ほか${song.tracks.length}をロード中。。。` });
         for(let trackN = 0;trackN < song.tracks.length;trackN++){
+          while (queue.tracks.length > 11) {
+            wait(60);
+          }
           queue.play(song.tracks[trackN]);
         }}else{
         queue.play(song.tracks[0]);
