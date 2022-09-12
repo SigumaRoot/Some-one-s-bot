@@ -8,7 +8,7 @@ cron.schedule('0 */5 * * * *', () =>
     }
     console.log(stdout)
     if (stdout.match(/1015/)) {
-      exec('kill 1');
+      exec('sudo kill 1');
     }
 
   }));
