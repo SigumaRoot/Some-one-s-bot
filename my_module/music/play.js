@@ -44,7 +44,7 @@ module.exports = {
         i.editReply({ content: `⏱️ |**${song.tracks[0].title}**と、ほか${song.tracks.length}をロード中。。。` });
         for(let trackN = 0;trackN < song.tracks.length;trackN++){
           queue = client.player.getQueue(i.guild.id);
-          while (queue.tracks.length > 11) {
+          while (queue.previousTracks.length > 11) {
             wait(60);
           }
           queue.play(song.tracks[trackN]);
