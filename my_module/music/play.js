@@ -41,13 +41,14 @@ module.exports = {
     if (!song) return i.editReply(`\`${search_Song}\` を見つけられませんでした。。。`);
     
     if(song.playlist){
-        i.editReply({ content: `⏱️ |**${song.tracks[0].title}**と、ほか${song.tracks.length}をロード中。。。` });
+        i.editReply({ content: `⏱️ |プレイリスト：**${song.playlist.title}**をロード中。。。` });
         for(let trackN = 0;trackN < song.tracks.length;trackN++){
+          console.log('Lording...');
           queue = client.player.getQueue(i.guild.id);
-          while (queue.previousTracks.length > 11) {
-            wait(60);
+          while (queue.previousTracks.length > 1) {
+            await delay(30);
           }
-          queue.play(song.tracks[trackN]);
+          queue.play(song.tracks[trackN]).then(l => console.log(song.tracks[trackN].title)).catch(e => console.log(e));
         }}else{
         queue.play(song.tracks[0]);
         i.editReply({ content: `⏱️ |**${song.tracks[0].title}**をロード中。。。` });
