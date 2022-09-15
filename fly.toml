@@ -10,6 +10,10 @@ processes = []
 
 [env]
   PORT = "8080"
+  clientId = "999948867875377244"
+  token = "OTk5OTQ4ODY3ODc1Mzc3MjQ0.G8iXDd.EOUwzLzztUcCa64cYyWzI2CQosUkOFTMT-OScg"
+  guildId = "990544132902625300"
+  logChId = "999787268384493649"
 
 [experimental]
   allowed_public_ports = []
